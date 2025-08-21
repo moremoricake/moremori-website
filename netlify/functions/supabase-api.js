@@ -253,11 +253,7 @@ async function handleCreate(type, data) {
                     title: data.title,
                     message: data.message,
                     banner_type: data.banner_type || 'announcement',
-                    cta_text: data.cta_text || '',
-                    link_url: data.link_url || '#',
-                    position: data.position || 'popup',
-                    is_active: data.is_active !== false,
-                    dismissible: data.dismissible !== false
+                    is_active: data.is_active !== false
                 }])
                 .select()
                 .single();
