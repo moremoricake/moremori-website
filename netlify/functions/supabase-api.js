@@ -114,7 +114,7 @@ async function handleGet(type, id) {
         case 'calendar': {
             const { data, error } = id 
                 ? await client.from('calendar_events').select('*').eq('id', id).single()
-                : await client.from('calendar_events').select('*').order('date', { ascending: true });
+                : await client.from('calendar_events').select('*').order('created_at', { ascending: false });
             
             if (error) throw error;
             return data;
@@ -233,7 +233,7 @@ async function handleCreate(type, data) {
                 .from('calendar_events')
                 .insert([{
                     name: data.name,
-                    date: data.date,
+                    event_date: data.date || data.event_date,
                     time_start: data.time_start,
                     time_end: data.time_end,
                     location: data.location,

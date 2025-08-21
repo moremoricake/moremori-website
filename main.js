@@ -143,22 +143,28 @@ class MoreMoriSite {
             // Transformiere Kalender-Events zu Popup-Events
             this.events = calendarEvents
                 .filter(event => {
-                    const eventDate = new Date(event.date);
+                    const eventDateStr = event.event_date || event.date;
+                    if (!eventDateStr) return false;
+                    
+                    const eventDate = new Date(eventDateStr);
                     const now = new Date();
                     // Nur zukünftige oder heutige Events als Popups
                     return eventDate >= now.setHours(0,0,0,0);
                 })
-                .map(event => ({
-                    id: `event_${event.id}`,
-                    type: 'announcement',
-                    active: true,
-                    title: `📅 ${event.name}`,
-                    message: `${event.location} - ${event.date} von ${event.time_start} bis ${event.time_end}`,
-                    image: null,
-                    priority: 'normal',
-                    showOnce: true,
-                    validUntil: new Date(event.date)
-                }));
+                .map(event => {
+                    const eventDateStr = event.event_date || event.date;
+                    return {
+                        id: `event_${event.id}`,
+                        type: 'announcement',
+                        active: true,
+                        title: `📅 ${event.name}`,
+                        message: `${event.location || 'MoreMori'} - ${eventDateStr} von ${event.time_start || '00:00'} bis ${event.time_end || '23:59'}`,
+                        image: null,
+                        priority: 'normal',
+                        showOnce: true,
+                        validUntil: new Date(eventDateStr)
+                    };
+                });
                 
             console.log('Events geladen:', this.events.length);
         } catch (error) {
