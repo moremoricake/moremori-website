@@ -254,16 +254,32 @@ class MoreMoriAdmin {
     }
 
     getEmptyPricesCount() {
-        const prices = this.data.prices;
+        const prices = this.data.prices || [];
         let emptyCount = 0;
         
-        Object.values(prices).forEach(category => {
-            Object.values(category).forEach(price => {
-                if (price === 0 || price === null || price === undefined) {
+        if (Array.isArray(prices)) {
+            prices.forEach(priceItem => {
+                if (!priceItem.price || priceItem.price === 0) {
                     emptyCount++;
                 }
             });
-        });
+        } else if (typeof prices === 'object') {
+            Object.values(prices).forEach(category => {
+                if (Array.isArray(category)) {
+                    category.forEach(price => {
+                        if (price === 0 || price === null || price === undefined) {
+                            emptyCount++;
+                        }
+                    });
+                } else if (typeof category === 'object') {
+                    Object.values(category).forEach(price => {
+                        if (price === 0 || price === null || price === undefined) {
+                            emptyCount++;
+                        }
+                    });
+                }
+            });
+        }
         
         return emptyCount;
     }
