@@ -1,10 +1,8 @@
 // Sweet Bakery Animation System (ohne Parallax)
 class SweetAnimationSystem {
     constructor() {
+        this.scrollElements = [];
         this.init();
-        this.setupScrollAnimations();
-        this.setupLoadingAnimation();
-        this.setupInteractiveEffects();
     }
 
     init() {
@@ -27,6 +25,12 @@ class SweetAnimationSystem {
         
         // Background Bubbles hinzufügen
         this.createBackgroundBubbles();
+        
+        // Scroll Animations Setup
+        this.setupScrollAnimations();
+        
+        // Interactive Effects Setup
+        this.setupInteractiveEffects();
         
         // Event Listeners
         this.addEventListeners();
