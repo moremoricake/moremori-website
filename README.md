@@ -1,196 +1,141 @@
-# MoreMori Sweet it yourself 🧁
+# MoreMori - Ulms erste interaktive Cake-Bar 🍰
 
-Eine professionelle Landing Page für Ulms erste interaktive mobile Cake-Bar mit vollständigem Admin-Panel.
+[![Netlify Status](https://api.netlify.com/api/v1/badges/YOUR-BADGE-ID/deploy-status)](https://app.netlify.com/sites/moremori/deploys)
+
+Willkommen bei MoreMori, der ersten interaktiven Cake-Bar in Ulm! Hier können Kunden ihre eigenen süßen Kreationen zusammenstellen.
+
+🚀 **Live Website:** [moremori.netlify.app](https://moremori.netlify.app) _(nach Deployment)_
+
+## 🌟 Features
+
+- **🍰 Interaktive Cake-Bar** - Kunden gestalten ihre eigenen Desserts
+- **📱 Responsive Design** - Optimiert für alle Geräte
+- **⚡ Serverless Backend** - Netlify Functions + Supabase
+- **🎨 Admin-Panel** - Preise, Inhalte und Banner verwalten
+- **🖼️ Bild-Upload** - Supabase Storage Integration
+- **📅 Event-Management** - Kalender und Popup-System
+- **💬 FAQ-System** - Dynamisch verwaltbare FAQs
+- **🏷️ Banner-Management** - Promo-Banner mit Admin-Interface
+
+## 🛠️ Technologie Stack
+
+- **Frontend:** Vanilla JavaScript, HTML5, CSS3
+- **Backend:** Netlify Functions (JavaScript)
+- **Datenbank:** Supabase (PostgreSQL)
+- **Storage:** Supabase Storage
+- **Deployment:** Netlify
+- **Version Control:** Git + GitHub
+
+## 🚀 Quick Start
+
+### 1. Repository klonen
+```bash
+git clone https://github.com/YOUR-USERNAME/moremori-website.git
+cd moremori-website
+```
+
+### 2. Supabase konfigurieren
+1. Erstelle ein [Supabase](https://supabase.com) Projekt
+2. Führe `supabase-schema.sql` in der SQL-Konsole aus
+3. Erstelle einen Storage Bucket namens `moremori-images`
+4. Konfiguriere Environment Variables (siehe Deployment)
+
+### 3. Lokal entwickeln
+```bash
+npm install
+npm run dev
+```
+
+### 4. Auf Netlify deployen
+1. Erstelle einen [Netlify](https://netlify.com) Account
+2. Verbinde dein GitHub Repository
+3. Konfiguriere Environment Variables:
+   - `SUPABASE_URL`
+   - `SUPABASE_ANON_KEY`
+   - `SUPABASE_SERVICE_ROLE_KEY`
+4. Deploy! 🚀
+
+> Detaillierte Anleitung in [DEPLOY.md](DEPLOY.md)
 
 ## 📁 Projektstruktur
 
 ```
-W:\Bake\
-├── index.html           # Haupt-Landing Page
-├── style.css           # Landing Page Styling
-├── admin.html          # Admin-Panel Interface  
-├── admin-style.css     # Admin-Panel Styling
-├── admin-script.js     # Admin-Panel JavaScript
-├── admin-backend.php   # PHP Backend für Datenverwaltung
-└── README.md          # Diese Dokumentation
+moremori-website/
+├── 📄 index.html              # Hauptseite
+├── 📄 admin.html              # Admin-Panel
+├── 🎨 style.css               # Hauptstyles
+├── 🎨 main-features.css       # Feature-Styles
+├── 🎨 admin-style.css         # Admin-Styles
+├── ⚡ main.js                 # Frontend Logic
+├── ⚡ admin-script.js         # Admin Logic
+├── 📦 netlify/
+│   └── functions/
+│       └── supabase-api.js    # Serverless API
+├── 🗄️ supabase-schema.sql    # Datenbankschema
+├── ⚙️ netlify.toml           # Netlify Config
+├── 📦 package.json           # Dependencies
+└── 📖 DEPLOY.md              # Deployment Guide
 ```
 
-## 🌟 Features
+## 🔧 Technische Details
 
-### **Landing Page:**
-- ✅ **Responsive Design** (Mobile-First)
-- ✅ **Moderne Farbverläufe** und Animationen
-- ✅ **3-Schritte Comic-Anleitung** für DIY-Konzept
-- ✅ **Mehrfache Kontaktmöglichkeiten** (WhatsApp, E-Mail, Telefon)
-- ✅ **Kontaktformular** für direkte Anfragen
-- ✅ **Allergie-Warnungen** mit ⚠️ Symbolen
-- ✅ **Event-Catering** Sektion
-- ✅ **Newsletter-Anmeldung**
-- ✅ **Social Media Integration**
+### Frontend
+- **HTML5** mit semantischen Strukturen
+- **CSS3** mit Flexbox und Grid
+- **Vanilla JavaScript** (ES6+) - keine Frameworks!
+- **Responsive Design** für alle Geräte
+- **Accessibility** Features
+- **Performance-optimiert**
 
-### **Admin-Panel:**
-- ✅ **Dashboard** mit Übersicht
-- ✅ **Produktbilder verwalten** (Upload, Bearbeiten, Löschen)
-- ✅ **Preise ändern** für alle Produkte und Services
-- ✅ **Inhalte bearbeiten** (Texte, Beschreibungen)
-- ✅ **Kalender-Management** (Termine hinzufügen/löschen)
-- ✅ **Allergie-Warnungen konfigurieren** ⚠️
-- ✅ **Einstellungen** (Kontaktdaten, Social Media)
-- ✅ **Responsive Admin-Interface**
+### Backend
+- **Serverless Functions** (Netlify)
+- **PostgreSQL** Datenbank (Supabase)
+- **REST API** für alle CRUD-Operationen
+- **File Upload** zu Cloud Storage
+- **Environment-basierte Konfiguration**
 
-## 🚀 Quick Start
+## 🔐 Environment Variables
 
-### 1. Website ansehen:
-```bash
-# Im Browser öffnen
-start index.html
+Für Netlify Deployment benötigte Variablen:
+
+```env
+SUPABASE_URL=https://your-project.supabase.co
+SUPABASE_ANON_KEY=your-anon-key
+SUPABASE_SERVICE_ROLE_KEY=your-service-role-key
 ```
 
-### 2. Admin-Panel öffnen:
-```bash
-# Admin-Panel im Browser öffnen
-start admin.html
-```
+## 🤝 Beitragen
 
-### 3. Mit lokalem Server (empfohlen):
-```bash
-# PHP Development Server starten
-php -S localhost:8000
+1. Fork das Repository
+2. Erstelle einen Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit deine Änderungen (`git commit -m 'Add some AmazingFeature'`)
+4. Push zum Branch (`git push origin feature/AmazingFeature`)
+5. Öffne einen Pull Request
 
-# Dann öffnen:
-# http://localhost:8000/index.html
-# http://localhost:8000/admin.html
-```
+## 📝 Roadmap
 
-## 🎨 Design-Updates
+- [ ] Online-Bestellsystem
+- [ ] PayPal/Stripe Integration
+- [ ] Kunden-Account System
+- [ ] Push-Benachrichtigungen
+- [ ] Mobile App (PWA)
+- [ ] Multi-Language Support
 
-Das Design wurde modernisiert mit:
-- **Lebendige Farbpalette:** Pink-Akzente (#E91E63) für mehr Aufmerksamkeit
-- **Gradient-Hintergründe** für moderne Optik
-- **Verbesserte Button-Animationen** mit Glanz-Effekten
-- **Erweiterte Kontaktoptionen** mit WhatsApp-Integration
-- **Professionelle Schatten** und Hover-Effekte
+## 📞 Support & Kontakt
 
-## ⚙️ Admin-Panel Funktionen
+- 🌐 **Website:** [moremori.de](https://moremori.de)
+- 📧 **E-Mail:** info@moremori.de
+- 📱 **WhatsApp:** +49 123 456 7890
+- 📍 **Standort:** Ulm, Deutschland
 
-### **Dashboard:**
-- Schnellübersicht aller wichtigen Kennzahlen
-- Direkte Sprunglinks zu den verschiedenen Bereichen
+## 📄 Lizenz
 
-### **Produktbilder:** 📸
-- Drag & Drop Bildupload
-- Bildverwaltung mit Vorschau
-- Alt-Text und Beschreibungen editieren
-
-### **Preise:** 💰
-- **Basis-Riegel:** MoreMori Wolke, Mokka-Traum
-- **Toppings:** Vanille-Creme, Erdbeersoße, Karamell
-- **Event-Pakete:** Basis- und Premium-Pakete
-
-### **Allergie-Warnungen:** ⚠️
-- Checkbox-System für alle Allergene
-- **Live-Vorschau** der Warnung
-- Automatische Anzeige auf der Website
-
-### **Kalender:** 📅
-- Events hinzufügen/bearbeiten/löschen
-- Datum, Zeit und Ort verwalten
-- Automatische Website-Aktualisierung
-
-## 🔧 Backend-API
-
-Das PHP-Backend bietet folgende Endpunkte:
-
-```php
-GET    /admin-backend.php?action=data        # Alle Daten abrufen
-POST   /admin-backend.php?action=upload      # Bild hochladen  
-PUT    /admin-backend.php?action=prices      # Preise aktualisieren
-DELETE /admin-backend.php?action=image&id=1  # Bild löschen
-POST   /admin-backend.php?action=contact     # Kontaktformular
-POST   /admin-backend.php?action=newsletter  # Newsletter-Anmeldung
-```
-
-## 📱 Responsive Breakpoints
-
-- **Mobile:** < 768px
-- **Tablet:** 768px - 1024px  
-- **Desktop:** > 1024px
-
-## 🎯 Content Management Features
-
-Entsprechend deiner Regel können folgende Inhalte einfach geändert werden:
-
-### ✅ **Produktbilder:** 
-- Upload über Admin-Panel
-- Automatische Optimierung
-- Alt-Text Management
-
-### ✅ **Preise:**
-- Einfache Eingabefelder
-- Euro-Formatierung
-- Sofortige Aktualisierung
-
-### ✅ **Beschreibungen:**
-- WYSIWYG-ähnliche Bearbeitung
-- Multi-Line Support
-- Live-Vorschau
-
-### ✅ **Allergie-Warnungen:**
-- Checkbox-System
-- **Automatische ⚠️ Symbole**
-- Compliance-ready
-
-## 🔒 Sicherheit
-
-**Wichtige Sicherheitshinweise für Produktion:**
-
-1. **Passwörter ändern** in `admin-backend.php`
-2. **API-Keys** über Umgebungsvariablen setzen
-3. **HTTPS** verwenden
-4. **Input-Validierung** auf Server-Seite
-5. **Backup-System** einrichten
-
-## 🚀 Deployment
-
-### **Für Live-Betrieb:**
-
-1. **Webserver** mit PHP 7.4+ 
-2. **SSL-Zertifikat** installieren
-3. **Backup-System** einrichten
-4. **Admin-Zugangsdaten** sicher konfigurieren
-
-### **Empfohlene Hosting-Provider:**
-- **All-Inkl.com** (Deutschland)
-- **Strato** 
-- **1und1/IONOS**
-
-## 📞 Kontaktdaten anpassen
-
-Im Admin-Panel unter **"Einstellungen"** können geändert werden:
-- Telefonnummer: `+49 123 456 7890`
-- E-Mail: `info@moremori.de`  
-- WhatsApp: `+49 123 456 7890`
-- Social Media Links
-
-## 🆘 Support
-
-Das System ist so konzipiert, dass auch technische Laien die wichtigsten Inhalte über das Admin-Panel ändern können.
-
-**Bei Problemen:**
-1. Browser-Cache leeren
-2. Admin-Panel neu laden
-3. PHP-Logs prüfen
-
-## 📈 Nächste Entwicklungsschritte
-
-**Mögliche Erweiterungen:**
-- 🛒 **Online-Shop** Integration
-- 📊 **Analytics** Dashboard  
-- 🔔 **Push-Notifications**
-- 📧 **E-Mail-Marketing** Integration
-- 💳 **Payment-Gateway** für Events
-- 🗺️ **Google Maps** Integration
+Dieses Projekt steht unter der MIT-Lizenz. Siehe [LICENSE](LICENSE) für Details.
 
 ---
 
-**Entwickelt für MoreMori - Süße Momente zum Selbergestalten** ✨
+*Erstellt mit ❤️ in Ulm für süße Momente zum Selbergestalten* 🍰
+
+[![Made with Love](https://img.shields.io/badge/Made%20with-❤️-red.svg)](https://github.com/YOUR-USERNAME/moremori-website)
+[![Netlify](https://img.shields.io/badge/Deployed%20on-Netlify-00C7B7.svg)](https://netlify.com)
+[![Supabase](https://img.shields.io/badge/Backend-Supabase-3ECF8E.svg)](https://supabase.com)
