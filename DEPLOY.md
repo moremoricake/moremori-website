@@ -32,9 +32,9 @@ git commit -m "Initial MoreMori website"
    - Gehe zu Site Settings > Environment variables
    - Füge hinzu:
      ```
-     SUPABASE_URL = https://fmknnazatrnknfqoykys.supabase.co
-     SUPABASE_ANON_KEY = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZta25uYXphdHJua25mcW95a3lzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTU4MDYwMjYsImV4cCI6MjA3MTM4MjAyNn0.kvO5E-94R5uiAOhJuzVzHmp8OSynKEsm0WCWIdPoCcU
-     SUPABASE_SERVICE_ROLE_KEY = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZta25uYXphdHJua25mcW95a3lzIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc1NTgwNjAyNiwiZXhwIjoyMDcxMzgyMDI2fQ.nUQas46jMlWfWnsq2r6PdNOm_-nxCo2e7RKbx-7XsQA
+     SUPABASE_URL = https://dein-projekt-id.supabase.co
+     SUPABASE_ANON_KEY = dein_anon_key_hier
+     SUPABASE_SERVICE_ROLE_KEY = dein_service_role_key_hier
      ```
 
 ### Option B: Git-basiertes Deployment (Professioneller)
