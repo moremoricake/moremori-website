@@ -150,12 +150,12 @@ body::after {
     font-size: 2.5rem;
     font-weight: var(--heading-font-weight);
     color: var(--secondary-color);
-    margin-bottom: 20px;
+    margin-bottom: var(--element-margin); /* Mehr Abstand nach Titel */
 }
 
 .section-description {
     max-width: 600px;
-    margin: 0 auto 40px;
+    margin: 0 auto var(--element-margin); /* Mehr Abstand nach Beschreibung */
     font-size: 1.1rem;
 }
 
@@ -388,9 +388,10 @@ body::after {
 
 .comic-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 40px;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); /* Größere Min-Breite für bessere Proportionen */
+    gap: 60px; /* Mehr Abstand zwischen Comic-Panels */
     text-align: center;
+    margin-top: 40px; /* Mehr Abstand vom Titel */
 }
 
 .comic-panel {
@@ -460,10 +461,11 @@ body::after {
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
 }
 
-/* Kundenstimmen & Partner */
+/* Kundenstimmen & Partner - Extra Weißraum */
 .testimonials-section {
     background: var(--warm-gradient);
     position: relative;
+    padding: var(--section-padding-large) 0; /* Extra großer Weißraum */
 }
 
 .testimonials-section::before {
@@ -485,8 +487,8 @@ body::after {
 .testimonial-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
-    margin-bottom: 60px;
+    gap: 40px; /* Mehr Abstand zwischen Testimonials */
+    margin-bottom: var(--element-margin); /* Konsistenter Abstand */
 }
 
 .testimonial-card {
@@ -583,9 +585,10 @@ body::after {
     background-color: var(--accent-color);
 }
 
-/* Events & Catering */
+/* Events & Catering - Extra Weißraum */
 .events-section {
     background-color: #fff;
+    padding: var(--section-padding-large) 0; /* Extra großer Weißraum für wichtige Sektion */
 }
 
 .event-list {
@@ -620,18 +623,19 @@ body::after {
 }
 
 .faq-item {
-    max-width: 800px;
-    margin: 0 auto 20px;
+    max-width: 900px; /* Etwas breitere FAQ-Items */
+    margin: 0 auto 30px; /* Mehr Abstand zwischen FAQ-Items */
     background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
+    padding: 30px; /* Mehr Padding in FAQ-Items */
+    border-radius: var(--border-radius-small); /* Konsistente Border-Radius */
     text-align: left;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    box-shadow: var(--card-shadow); /* Konsistente Schatten */
 }
 
 .faq-item h3 {
     color: var(--secondary-color);
-    margin-bottom: 10px;
+    margin-bottom: 20px; /* Mehr Abstand nach FAQ-Titel */
+    font-size: 1.2rem; /* Etwas größere Überschriften */
 }
 
 /* Kontakt- & Newsletter-Sektion */

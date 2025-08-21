@@ -132,10 +132,10 @@ async function handleGet(type, id) {
         case 'faq': {
             const { data, error } = id 
                 ? await client.from('faq').select('*').eq('id', id).single()
-                : await client.from('faq').select('*').order('sort_order', { ascending: true });
+                : await client.from('faq').select('*');
             
             if (error) throw error;
-            return data;
+            return data || [];
         }
 
         case 'allergies': {
