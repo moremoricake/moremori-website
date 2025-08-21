@@ -1,0 +1,1267 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MoreMori Admin Panel - Content Management</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Righteous&family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="admin-style.css">
+</head>
+<body>
+    <div class="admin-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2><i class="fas fa-cog"></i> MoreMori Admin</h2>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="#dashboard" class="nav-item active" data-section="dashboard">
+                    <i class="fas fa-home"></i> Dashboard
+                </a>
+                <a href="#products" class="nav-item" data-section="products">
+                    <i class="fas fa-images"></i> Produktbilder
+                </a>
+                <a href="#prices" class="nav-item" data-section="prices">
+                    <i class="fas fa-euro-sign"></i> Preise
+                </a>
+                <a href="#content" class="nav-item" data-section="content">
+                    <i class="fas fa-edit"></i> Inhalte
+                </a>
+                <a href="#calendar" class="nav-item" data-section="calendar">
+                    <i class="fas fa-calendar"></i> Kalender
+                </a>
+                <a href="#event-showcase" class="nav-item" data-section="event-showcase">
+                    <i class="fas fa-star"></i> Event-Showcase
+                </a>
+                <a href="#allergies" class="nav-item" data-section="allergies">
+                    <i class="fas fa-exclamation-triangle"></i> Allergie-Warnungen
+                </a>
+                <a href="#faq" class="nav-item" data-section="faq">
+                    <i class="fas fa-question-circle"></i> FAQ verwalten
+                </a>
+                <a href="#banners" class="nav-item" data-section="banners">
+                    <i class="fas fa-bullhorn"></i> Event-Banner
+                </a>
+                <a href="#settings" class="nav-item" data-section="settings">
+                    <i class="fas fa-cog"></i> Einstellungen
+                </a>
+            </nav>
+            <div class="sidebar-footer">
+                <a href="index.html" class="back-to-site">
+                    <i class="fas fa-arrow-left"></i> Zurück zur Website
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Dashboard -->
+            <section id="dashboard" class="admin-section active">
+                <div class="section-header">
+                    <h1>Dashboard</h1>
+                    <p>Willkommen im MoreMori Content Management System</p>
+                </div>
+                
+                <div class="dashboard-grid">
+                    <!-- Produktstatistiken -->
+                    <div class="dashboard-card stat-card" data-stat="products">
+                        <div class="card-icon">
+                            <i class="fas fa-images"></i>
+                        </div>
+                        <div class="card-content">
+                            <h3>Produktbilder</h3>
+                            <div class="stat-number">
+                                <span class="stat-value">12</span>
+                                <span class="stat-change positive">+12%</span>
+                            </div>
+                            <p class="stat-subtitle">Bilder hochgeladen</p>
+                        </div>
+                        <button class="card-button" data-section="products">Verwalten</button>
+                    </div>
+                    
+                    <!-- Preisstatistiken -->
+                    <div class="dashboard-card stat-card" data-stat="prices">
+                        <div class="card-icon">
+                            <i class="fas fa-euro-sign"></i>
+                        </div>
+                        <div class="card-content">
+                            <h3>Preise</h3>
+                            <div class="stat-number">
+                                <span class="stat-value">7</span>
+                                <span class="stat-change neutral">~</span>
+                            </div>
+                            <p class="stat-subtitle">Ø 4.50€ pro Artikel</p>
+                        </div>
+                        <button class="card-button" data-section="prices">Bearbeiten</button>
+                    </div>
+                    
+                    <!-- Event-Banner Statistiken -->
+                    <div class="dashboard-card stat-card" data-stat="banners">
+                        <div class="card-icon">
+                            <i class="fas fa-bullhorn"></i>
+                        </div>
+                        <div class="card-content">
+                            <h3>Event-Banner</h3>
+                            <div class="stat-number">
+                                <span class="stat-value">1</span>
+                                <span class="stat-change positive">+100%</span>
+                            </div>
+                            <p class="stat-subtitle">3 gesamt, 1 aktiv</p>
+                        </div>
+                        <button class="card-button" data-section="banners">Verwalten</button>
+                    </div>
+                    
+                    <!-- Aktivitäts-Statistiken -->
+                    <div class="dashboard-card stat-card" data-stat="activity">
+                        <div class="card-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="card-content">
+                            <h3>Letzte Aktivität</h3>
+                            <div class="stat-number">
+                                <span class="stat-value">2min</span>
+                                <span class="stat-change positive">+</span>
+                            </div>
+                            <p class="stat-subtitle">3 Änderungen heute</p>
+                        </div>
+                        <button class="card-button" data-section="settings">Einstellungen</button>
+                    </div>
+                    
+                    <!-- Quick Actions -->
+                    <div class="dashboard-card stat-card" data-stat="quick-actions">
+                        <div class="card-icon">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <div class="card-content">
+                            <h3>Quick Actions</h3>
+                            <div class="quick-actions-grid">
+                                <button class="quick-action-btn" data-section="prices" data-action="add-item">
+                                    <i class="fas fa-plus"></i> Artikel
+                                </button>
+                                <button class="quick-action-btn" data-section="banners" data-action="new-banner">
+                                    <i class="fas fa-bullhorn"></i> Banner
+                                </button>
+                                <button class="quick-action-btn" data-section="calendar" data-action="add-event">
+                                    <i class="fas fa-calendar-plus"></i> Event
+                                </button>
+                                <button class="quick-action-btn" onclick="saveAll()">
+                                    <i class="fas fa-save"></i> Alles speichern
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Performance Dashboard -->
+                    <div class="dashboard-card stat-card performance-card">
+                        <div class="card-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="card-content">
+                            <h3>Performance</h3>
+                            <div class="performance-stats">
+                                <div class="perf-item">
+                                    <span class="perf-label">Website-Speed</span>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 85%"></div>
+                                    </div>
+                                    <span class="perf-value">85%</span>
+                                </div>
+                                <div class="perf-item">
+                                    <span class="perf-label">SEO-Score</span>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 92%"></div>
+                                    </div>
+                                    <span class="perf-value">92%</span>
+                                </div>
+                                <div class="perf-item">
+                                    <span class="perf-label">Accessibility</span>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 88%"></div>
+                                    </div>
+                                    <span class="perf-value">88%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Produktbilder -->
+            <section id="products" class="admin-section">
+                <div class="section-header">
+                    <h1>Produktbilder verwalten</h1>
+                    <button class="primary-btn">
+                        <i class="fas fa-plus"></i> Neues Bild hochladen
+                    </button>
+                </div>
+                
+                <div class="image-grid">
+                    <div class="image-card">
+                        <img src="https://placehold.co/300x300/FFF8E1/333333?text=Hero-Bild" alt="Hero Bild">
+                        <div class="image-info">
+                            <h4>Hero-Bild</h4>
+                            <div class="image-actions">
+                                <button class="edit-btn"><i class="fas fa-edit"></i></button>
+                                <button class="delete-btn"><i class="fas fa-trash"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="image-card">
+                        <img src="https://placehold.co/300x300/FFF8E1/333333?text=Schritt-1" alt="Schritt 1">
+                        <div class="image-info">
+                            <h4>Schritt 1 - Basis wählen</h4>
+                            <div class="image-actions">
+                                <button class="edit-btn"><i class="fas fa-edit"></i></button>
+                                <button class="delete-btn"><i class="fas fa-trash"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="image-card">
+                        <img src="https://placehold.co/300x300/FFF8E1/333333?text=Schritt-2" alt="Schritt 2">
+                        <div class="image-info">
+                            <h4>Schritt 2 - Creme auftragen</h4>
+                            <div class="image-actions">
+                                <button class="edit-btn"><i class="fas fa-edit"></i></button>
+                                <button class="delete-btn"><i class="fas fa-trash"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="upload-placeholder">
+                        <i class="fas fa-plus"></i>
+                        <p>Neues Bild hinzufügen</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Preise -->
+            <section id="prices" class="admin-section">
+                <div class="section-header">
+                    <h1>Preise verwalten</h1>
+                    <button class="primary-btn save-all-prices">
+                        <i class="fas fa-save"></i> Alle Preise speichern
+                    </button>
+                </div>
+                
+                <div class="form-grid">
+                    <div class="form-card">
+                        <div class="category-header">
+                            <h3>Basis-Riegel</h3>
+                            <button class="add-item-btn" data-category="bases">
+                                <i class="fas fa-plus"></i> Neuen Riegel hinzufügen
+                            </button>
+                        </div>
+                        <div class="price-items-container" data-category="bases">
+                            <div class="price-item-extended" data-item-id="wolke">
+                                <div class="item-info">
+                                    <input type="text" value="MoreMori Wolke" class="item-name-input">
+                                    <textarea rows="2" class="item-description-input" placeholder="Produktbeschreibung...">Unsere saftige Basis mit luftiger Textur und vanilligem Geschmack.</textarea>
+                                </div>
+                                <div class="item-price">
+                                    <input type="number" step="0.10" value="4.50" class="price-input">
+                                    <span class="currency">€</span>
+                                </div>
+                                <div class="item-actions">
+                                    <button class="edit-item-btn"><i class="fas fa-edit"></i></button>
+                                    <button class="delete-item-btn"><i class="fas fa-trash"></i></button>
+                                </div>
+                            </div>
+                            <div class="price-item-extended" data-item-id="mokka">
+                                <div class="item-info">
+                                    <input type="text" value="Mokka-Traum" class="item-name-input">
+                                    <textarea rows="2" class="item-description-input" placeholder="Produktbeschreibung...">Intensiver Kaffeegeschmack mit einem Hauch von Schokolade.</textarea>
+                                </div>
+                                <div class="item-price">
+                                    <input type="number" step="0.10" value="4.90" class="price-input">
+                                    <span class="currency">€</span>
+                                </div>
+                                <div class="item-actions">
+                                    <button class="edit-item-btn"><i class="fas fa-edit"></i></button>
+                                    <button class="delete-item-btn"><i class="fas fa-trash"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-card">
+                        <div class="category-header">
+                            <h3>Cremes & Soßen</h3>
+                            <button class="add-item-btn" data-category="creams">
+                                <i class="fas fa-plus"></i> Neue Creme hinzufügen
+                            </button>
+                        </div>
+                        <div class="price-items-container" data-category="creams">
+                            <div class="price-item-extended" data-item-id="vanille">
+                                <div class="item-info">
+                                    <input type="text" value="Vanille-Creme" class="item-name-input">
+                                    <textarea rows="2" class="item-description-input" placeholder="Produktbeschreibung...">Cremige Vanille-Creme aus echter Bourbon-Vanille.</textarea>
+                                </div>
+                                <div class="item-price">
+                                    <input type="number" step="0.10" value="0.80" class="price-input">
+                                    <span class="currency">€</span>
+                                </div>
+                                <div class="item-actions">
+                                    <button class="edit-item-btn"><i class="fas fa-edit"></i></button>
+                                    <button class="delete-item-btn"><i class="fas fa-trash"></i></button>
+                                </div>
+                            </div>
+                            <div class="price-item-extended" data-item-id="erdbeere">
+                                <div class="item-info">
+                                    <input type="text" value="Erdbeersoße" class="item-name-input">
+                                    <textarea rows="2" class="item-description-input" placeholder="Produktbeschreibung...">Fruchtige Erdbeersoße aus echten Erdbeeren.</textarea>
+                                </div>
+                                <div class="item-price">
+                                    <input type="number" step="0.10" value="0.90" class="price-input">
+                                    <span class="currency">€</span>
+                                </div>
+                                <div class="item-actions">
+                                    <button class="edit-item-btn"><i class="fas fa-edit"></i></button>
+                                    <button class="delete-item-btn"><i class="fas fa-trash"></i></button>
+                                </div>
+                            </div>
+                            <div class="price-item-extended" data-item-id="karamell">
+                                <div class="item-info">
+                                    <input type="text" value="Flüssiges Karamell" class="item-name-input">
+                                    <textarea rows="2" class="item-description-input" placeholder="Produktbeschreibung...">Süßes, flüssiges Karamell mit butterigem Geschmack.</textarea>
+                                </div>
+                                <div class="item-price">
+                                    <input type="number" step="0.10" value="1.00" class="price-input">
+                                    <span class="currency">€</span>
+                                </div>
+                                <div class="item-actions">
+                                    <button class="edit-item-btn"><i class="fas fa-edit"></i></button>
+                                    <button class="delete-item-btn"><i class="fas fa-trash"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-card">
+                        <div class="category-header">
+                            <h3>Event-Pakete</h3>
+                            <button class="add-item-btn" data-category="events">
+                                <i class="fas fa-plus"></i> Neues Paket hinzufügen
+                            </button>
+                        </div>
+                        <div class="price-items-container" data-category="events">
+                            <div class="price-item-extended" data-item-id="basic">
+                                <div class="item-info">
+                                    <input type="text" value="Basis-Paket (20 Personen)" class="item-name-input">
+                                    <textarea rows="2" class="item-description-input" placeholder="Paketbeschreibung...">Perfekt für kleinere Events - 20 individuelle Riegel mit Basis-Ausstattung.</textarea>
+                                </div>
+                                <div class="item-price">
+                                    <input type="number" step="1.00" value="120.00" class="price-input">
+                                    <span class="currency">€</span>
+                                </div>
+                                <div class="item-actions">
+                                    <button class="edit-item-btn"><i class="fas fa-edit"></i></button>
+                                    <button class="delete-item-btn"><i class="fas fa-trash"></i></button>
+                                </div>
+                            </div>
+                            <div class="price-item-extended" data-item-id="premium">
+                                <div class="item-info">
+                                    <input type="text" value="Premium-Paket (50 Personen)" class="item-name-input">
+                                    <textarea rows="2" class="item-description-input" placeholder="Paketbeschreibung...">Für große Events - 50 Riegel mit Premium-Cremes und Toppings inklusive.</textarea>
+                                </div>
+                                <div class="item-price">
+                                    <input type="number" step="1.00" value="280.00" class="price-input">
+                                    <span class="currency">€</span>
+                                </div>
+                                <div class="item-actions">
+                                    <button class="edit-item-btn"><i class="fas fa-edit"></i></button>
+                                    <button class="delete-item-btn"><i class="fas fa-trash"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Neuen Artikel hinzufügen Modal -->
+                <div class="add-item-modal" style="display: none;">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3>Neuen Artikel hinzufügen</h3>
+                            <button class="modal-close">&times;</button>
+                        </div>
+                        <form class="add-item-form">
+                            <label>Artikelname:</label>
+                            <input type="text" class="new-item-name" placeholder="z.B. Schoko-Traum" required>
+                            
+                            <label>Beschreibung:</label>
+                            <textarea rows="3" class="new-item-description" placeholder="Kurze Beschreibung des Produkts..."></textarea>
+                            
+                            <label>Preis:</label>
+                            <div class="price-input-group">
+                                <input type="number" step="0.10" class="new-item-price" placeholder="0.00" required>
+                                <span class="currency">€</span>
+                            </div>
+                            
+                            <div class="modal-actions">
+                                <button type="submit" class="primary-btn">Artikel hinzufügen</button>
+                                <button type="button" class="secondary-btn modal-cancel">Abbrechen</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Inhalte -->
+            <section id="content" class="admin-section">
+                <div class="section-header">
+                    <h1>Inhalte bearbeiten</h1>
+                    <button class="primary-btn">
+                        <i class="fas fa-save"></i> Speichern
+                    </button>
+                </div>
+                
+                <div class="content-editor">
+                    <div class="editor-card">
+                        <h3>Hero-Bereich</h3>
+                        <label>Hauptslogan</label>
+                        <input type="text" value="Süße Momente zum Selbergestalten." class="content-input">
+                        <label>Untertitel</label>
+                        <input type="text" value="Ulms erste interaktive Cake-Bar, bei der DU der Künstler bist." class="content-input">
+                    </div>
+                    
+                    <div class="editor-card">
+                        <h3>Über uns Text</h3>
+                        <textarea rows="6" class="content-textarea">Als Gründer von MoreMori lebe ich meine Leidenschaft für Süßes aus. Bei uns geht es um mehr als nur Kuchen – es geht um ein Erlebnis. Wir verwenden nur die besten Zutaten und die traditionelle Tangzhong-Methode, um unsere Riegelböden besonders saftig zu machen.</textarea>
+                    </div>
+                    
+                    <div class="editor-card">
+                        <h3>Produktbeschreibungen</h3>
+                        <label>MoreMori Wolke</label>
+                        <textarea rows="3" class="content-textarea">Unsere saftige Basis mit luftiger Textur und vanilligem Geschmack.</textarea>
+                        <label>Mokka-Traum</label>
+                        <textarea rows="3" class="content-textarea">Intensiver Kaffeegeschmack mit einem Hauch von Schokolade.</textarea>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Kalender -->
+            <section id="calendar" class="admin-section">
+                <div class="section-header">
+                    <h1>Kalender verwalten</h1>
+                    <button class="primary-btn">
+                        <i class="fas fa-plus"></i> Neuen Termin hinzufügen
+                    </button>
+                </div>
+                
+                <div class="calendar-manager">
+                    <div class="event-item">
+                        <div class="event-info">
+                            <h4>Ulmer Wochenmarkt</h4>
+                            <p><i class="fas fa-calendar"></i> Samstag, 25. Oktober 2023</p>
+                            <p><i class="fas fa-clock"></i> 8:00 - 14:00 Uhr</p>
+                            <p><i class="fas fa-map-marker-alt"></i> Münsterplatz, Ulm</p>
+                        </div>
+                        <div class="event-actions">
+                            <button class="edit-btn"><i class="fas fa-edit"></i> Bearbeiten</button>
+                            <button class="delete-btn"><i class="fas fa-trash"></i> Löschen</button>
+                        </div>
+                    </div>
+                    
+                    <div class="event-item">
+                        <div class="event-info">
+                            <h4>Street Food Festival</h4>
+                            <p><i class="fas fa-calendar"></i> Sonntag, 26. Oktober 2023</p>
+                            <p><i class="fas fa-clock"></i> 11:00 - 18:00 Uhr</p>
+                            <p><i class="fas fa-map-marker-alt"></i> Donauufer, Ulm</p>
+                        </div>
+                        <div class="event-actions">
+                            <button class="edit-btn"><i class="fas fa-edit"></i> Bearbeiten</button>
+                            <button class="delete-btn"><i class="fas fa-trash"></i> Löschen</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Neuer Termin Form -->
+                    <div class="add-event-form" style="display: none;">
+                        <h3>Neuen Termin hinzufügen</h3>
+                        <div class="form-row">
+                            <input type="text" placeholder="Event-Name" class="form-input">
+                            <input type="date" class="form-input">
+                        </div>
+                        <div class="form-row">
+                            <input type="time" class="form-input">
+                            <input type="time" class="form-input">
+                        </div>
+                        <input type="text" placeholder="Adresse/Ort" class="form-input full-width">
+                        <div class="form-actions">
+                            <button class="primary-btn">Speichern</button>
+                            <button class="secondary-btn">Abbrechen</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Allergie-Warnungen -->
+            <section id="allergies" class="admin-section">
+                <div class="section-header">
+                    <h1>Allergie-Warnungen ⚠️</h1>
+                    <button class="primary-btn">
+                        <i class="fas fa-save"></i> Speichern
+                    </button>
+                </div>
+                
+                <div class="allergy-manager">
+                    <div class="allergy-grid">
+                        <div class="allergy-card">
+                            <div class="allergy-header">
+                                <h4>MoreMori Wolke</h4>
+                                <span class="status-active">Aktiv</span>
+                            </div>
+                            <div class="allergy-list">
+                                <label class="allergy-item">
+                                    <input type="checkbox" checked>
+                                    <span class="checkmark"></span>
+                                    Gluten (Weizen)
+                                </label>
+                                <label class="allergy-item">
+                                    <input type="checkbox" checked>
+                                    <span class="checkmark"></span>
+                                    Eier
+                                </label>
+                                <label class="allergy-item">
+                                    <input type="checkbox" checked>
+                                    <span class="checkmark"></span>
+                                    Milch
+                                </label>
+                                <label class="allergy-item">
+                                    <input type="checkbox">
+                                    <span class="checkmark"></span>
+                                    Nüsse
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="allergy-card">
+                            <div class="allergy-header">
+                                <h4>Mokka-Traum</h4>
+                                <span class="status-active">Aktiv</span>
+                            </div>
+                            <div class="allergy-list">
+                                <label class="allergy-item">
+                                    <input type="checkbox" checked>
+                                    <span class="checkmark"></span>
+                                    Gluten (Weizen)
+                                </label>
+                                <label class="allergy-item">
+                                    <input type="checkbox" checked>
+                                    <span class="checkmark"></span>
+                                    Eier
+                                </label>
+                                <label class="allergy-item">
+                                    <input type="checkbox" checked>
+                                    <span class="checkmark"></span>
+                                    Milch
+                                </label>
+                                <label class="allergy-item">
+                                    <input type="checkbox" checked>
+                                    <span class="checkmark"></span>
+                                    Koffein
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="allergy-card">
+                            <div class="allergy-header">
+                                <h4>Toppings</h4>
+                                <span class="status-warning">Prüfen</span>
+                            </div>
+                            <div class="allergy-list">
+                                <label class="allergy-item">
+                                    <input type="checkbox" checked>
+                                    <span class="checkmark"></span>
+                                    Nüsse (alle Sorten)
+                                </label>
+                                <label class="allergy-item">
+                                    <input type="checkbox">
+                                    <span class="checkmark"></span>
+                                    Erdnüsse
+                                </label>
+                                <label class="allergy-item">
+                                    <input type="checkbox" checked>
+                                    <span class="checkmark"></span>
+                                    Milchprodukte
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="allergy-warning-preview">
+                        <h3>Vorschau der Allergie-Warnung</h3>
+                        <div class="warning-box">
+                            <i class="fas fa-exclamation-triangle warning-icon"></i>
+                            <div class="warning-content">
+                                <h4>Allergie-Hinweise ⚠️</h4>
+                                <p><strong>Enthält:</strong> Gluten (Weizen), Eier, Milch, Nüsse</p>
+                                <p><strong>Kann Spuren enthalten von:</strong> Erdnüsse, Soja</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Event-Showcase -->
+            <section id="event-showcase" class="admin-section">
+                <div class="section-header">
+                    <h1>Event-Showcase ⭐</h1>
+                    <button class="primary-btn" id="add-showcase-event-btn">
+                        <i class="fas fa-plus"></i> Neues Event hinzufügen
+                    </button>
+                </div>
+                
+                <div class="showcase-manager">
+                    <!-- Event-Typen Übersicht -->
+                    <div class="event-types-grid">
+                        <!-- Event mit Bild -->
+                        <div class="showcase-event-item" data-event-type="with-image">
+                            <div class="event-preview">
+                                <div class="event-image-placeholder">
+                                    <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Hochzeit Event" class="event-image">
+                                    <div class="event-tag">Premium</div>
+                                </div>
+                                <div class="event-content">
+                                    <h4>Hochzeiten & Romantik 💕</h4>
+                                    <p>Romantische Riegel für den schönsten Tag im Leben - mit individuellen Cremes und liebevollem Design.</p>
+                                </div>
+                            </div>
+                            <div class="event-controls">
+                                <div class="event-status">
+                                    <label class="toggle-event">
+                                        <input type="checkbox" checked class="event-toggle">
+                                        <span class="toggle-slider"></span>
+                                    </label>
+                                    <span class="status-badge active">Aktiv</span>
+                                </div>
+                                <div class="event-actions">
+                                    <button class="edit-showcase-btn"><i class="fas fa-edit"></i> Bearbeiten</button>
+                                    <button class="delete-showcase-btn"><i class="fas fa-trash"></i> Löschen</button>
+                                    <button class="move-up-btn"><i class="fas fa-arrow-up"></i></button>
+                                    <button class="move-down-btn"><i class="fas fa-arrow-down"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Event mit Bild -->
+                        <div class="showcase-event-item" data-event-type="with-image">
+                            <div class="event-preview">
+                                <div class="event-image-placeholder">
+                                    <img src="https://images.unsplash.com/photo-1515187029135-18ee286d815b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Corporate Event" class="event-image">
+                                    <div class="event-tag">Business</div>
+                                </div>
+                                <div class="event-content">
+                                    <h4>Firmenevents & Catering 🏢</h4>
+                                    <p>Professionelles Catering für Meetings, Konferenzen und Firmenveranstaltungen mit individuellen Lösungen.</p>
+                                </div>
+                            </div>
+                            <div class="event-controls">
+                                <div class="event-status">
+                                    <label class="toggle-event">
+                                        <input type="checkbox" checked class="event-toggle">
+                                        <span class="toggle-slider"></span>
+                                    </label>
+                                    <span class="status-badge active">Aktiv</span>
+                                </div>
+                                <div class="event-actions">
+                                    <button class="edit-showcase-btn"><i class="fas fa-edit"></i> Bearbeiten</button>
+                                    <button class="delete-showcase-btn"><i class="fas fa-trash"></i> Löschen</button>
+                                    <button class="move-up-btn"><i class="fas fa-arrow-up"></i></button>
+                                    <button class="move-down-btn"><i class="fas fa-arrow-down"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Text-only Event -->
+                        <div class="showcase-event-item" data-event-type="text-only">
+                            <div class="event-preview">
+                                <div class="event-icon-display">
+                                    <i class="fas fa-birthday-cake event-large-icon"></i>
+                                    <div class="event-tag">Beliebt</div>
+                                </div>
+                                <div class="event-content">
+                                    <h4>Geburtstage & Feiern 🎂</h4>
+                                    <p>Süße Überraschungen für Geburtstagskinder jeden Alters - von klassisch bis ausgefallen.</p>
+                                </div>
+                            </div>
+                            <div class="event-controls">
+                                <div class="event-status">
+                                    <label class="toggle-event">
+                                        <input type="checkbox" checked class="event-toggle">
+                                        <span class="toggle-slider"></span>
+                                    </label>
+                                    <span class="status-badge active">Aktiv</span>
+                                </div>
+                                <div class="event-actions">
+                                    <button class="edit-showcase-btn"><i class="fas fa-edit"></i> Bearbeiten</button>
+                                    <button class="delete-showcase-btn"><i class="fas fa-trash"></i> Löschen</button>
+                                    <button class="move-up-btn"><i class="fas fa-arrow-up"></i></button>
+                                    <button class="move-down-btn"><i class="fas fa-arrow-down"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Text-only Event -->
+                        <div class="showcase-event-item" data-event-type="text-only">
+                            <div class="event-preview">
+                                <div class="event-icon-display">
+                                    <i class="fas fa-handshake event-large-icon"></i>
+                                    <div class="event-tag">Neu</div>
+                                </div>
+                                <div class="event-content">
+                                    <h4>Messen & Events 🎪</h4>
+                                    <p>Mobile Riegel-Station für Messen, Märkte und Events - wir kommen zu dir!</p>
+                                </div>
+                            </div>
+                            <div class="event-controls">
+                                <div class="event-status">
+                                    <label class="toggle-event">
+                                        <input type="checkbox" class="event-toggle">
+                                        <span class="toggle-slider"></span>
+                                    </label>
+                                    <span class="status-badge inactive">Inaktiv</span>
+                                </div>
+                                <div class="event-actions">
+                                    <button class="edit-showcase-btn"><i class="fas fa-edit"></i> Bearbeiten</button>
+                                    <button class="delete-showcase-btn"><i class="fas fa-trash"></i> Löschen</button>
+                                    <button class="move-up-btn"><i class="fas fa-arrow-up"></i></button>
+                                    <button class="move-down-btn"><i class="fas fa-arrow-down"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Event-Editor Form -->
+                    <div class="showcase-event-editor" style="display: none;">
+                        <h3>Event bearbeiten</h3>
+                        <form class="showcase-form">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Event-Typ:</label>
+                                    <select class="event-type-select">
+                                        <option value="with-image">Mit Bild</option>
+                                        <option value="text-only">Nur Text & Icon</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Event-Status:</label>
+                                    <select class="event-status-select">
+                                        <option value="active">Aktiv</option>
+                                        <option value="inactive">Inaktiv</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Event-Titel:</label>
+                                <input type="text" class="event-title-input" placeholder="z.B. Hochzeiten & Romantik 💕">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Beschreibung:</label>
+                                <textarea rows="3" class="event-description-input" placeholder="Beschreibung des Event-Typs..."></textarea>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Tag/Label:</label>
+                                    <input type="text" class="event-tag-input" placeholder="z.B. Premium, Business, Neu">
+                                </div>
+                                <div class="form-group">
+                                    <label>Verlinkung (optional):</label>
+                                    <input type="url" class="event-link-input" placeholder="https://...">
+                                </div>
+                            </div>
+                            
+                            <!-- Conditional fields based on event type -->
+                            <div class="image-settings" style="display: block;">
+                                <div class="form-group">
+                                    <label>Bild-URL:</label>
+                                    <input type="url" class="event-image-url" placeholder="https://...">
+                                    <small>Für optimale Darstellung: Mindestens 400x250px</small>
+                                </div>
+                            </div>
+                            
+                            <div class="icon-settings" style="display: none;">
+                                <div class="form-group">
+                                    <label>Icon (Font Awesome):</label>
+                                    <div class="icon-selector">
+                                        <input type="text" class="event-icon-input" placeholder="fas fa-birthday-cake">
+                                        <div class="icon-preview">
+                                            <i class="fas fa-birthday-cake preview-icon"></i>
+                                        </div>
+                                    </div>
+                                    <div class="icon-suggestions">
+                                        <button type="button" class="icon-btn" data-icon="fas fa-birthday-cake"><i class="fas fa-birthday-cake"></i> Geburtstag</button>
+                                        <button type="button" class="icon-btn" data-icon="fas fa-handshake"><i class="fas fa-handshake"></i> Business</button>
+                                        <button type="button" class="icon-btn" data-icon="fas fa-heart"><i class="fas fa-heart"></i> Romantik</button>
+                                        <button type="button" class="icon-btn" data-icon="fas fa-users"><i class="fas fa-users"></i> Gruppe</button>
+                                        <button type="button" class="icon-btn" data-icon="fas fa-gift"><i class="fas fa-gift"></i> Geschenke</button>
+                                        <button type="button" class="icon-btn" data-icon="fas fa-graduation-cap"><i class="fas fa-graduation-cap"></i> Abschluss</button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-actions">
+                                <button type="submit" class="primary-btn save-showcase-event-btn">Speichern</button>
+                                <button type="button" class="secondary-btn cancel-showcase-edit-btn">Abbrechen</button>
+                            </div>
+                        </form>
+                    </div>
+                    
+                    <!-- Event-Vorlagen -->
+                    <div class="showcase-templates">
+                        <h3>Event-Vorlagen</h3>
+                        <div class="template-categories">
+                            <div class="template-category">
+                                <h4><i class="fas fa-camera"></i> Mit Bildern</h4>
+                                <div class="template-buttons">
+                                    <button class="template-btn" data-template="wedding">
+                                        <i class="fas fa-heart"></i> Hochzeiten
+                                    </button>
+                                    <button class="template-btn" data-template="corporate">
+                                        <i class="fas fa-building"></i> Firmenevent
+                                    </button>
+                                    <button class="template-btn" data-template="party">
+                                        <i class="fas fa-music"></i> Party
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="template-category">
+                                <h4><i class="fas fa-icons"></i> Nur Text & Icons</h4>
+                                <div class="template-buttons">
+                                    <button class="template-btn" data-template="birthday">
+                                        <i class="fas fa-birthday-cake"></i> Geburtstag
+                                    </button>
+                                    <button class="template-btn" data-template="graduation">
+                                        <i class="fas fa-graduation-cap"></i> Abschluss
+                                    </button>
+                                    <button class="template-btn" data-template="exhibition">
+                                        <i class="fas fa-handshake"></i> Messe
+                                    </button>
+                                    <button class="template-btn" data-template="seasonal">
+                                        <i class="fas fa-snowflake"></i> Saisonal
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Call-to-Action Bereich Einstellungen -->
+                    <div class="cta-section-settings">
+                        <h3>Call-to-Action Bereich</h3>
+                        <div class="cta-preview">
+                            <div class="preview-box">
+                                <div class="cta-content-preview">
+                                    <h4>Dein Event ist nicht dabei? 🤔</h4>
+                                    <p>Kein Problem! Wir erstellen auch individuelle Riegel-Konzepte für besondere Anlässe.</p>
+                                    <button class="cta-button-preview">Jetzt anfragen</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <form class="cta-form">
+                            <div class="form-group">
+                                <label>CTA Titel:</label>
+                                <input type="text" class="cta-title-input" value="Dein Event ist nicht dabei? 🤔">
+                            </div>
+                            <div class="form-group">
+                                <label>CTA Text:</label>
+                                <textarea rows="2" class="cta-text-input">Kein Problem! Wir erstellen auch individuelle Riegel-Konzepte für besondere Anlässe.</textarea>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Button Text:</label>
+                                    <input type="text" class="cta-button-text" value="Jetzt anfragen">
+                                </div>
+                                <div class="form-group">
+                                    <label>Button Link:</label>
+                                    <input type="url" class="cta-button-link" placeholder="#kontakt oder mailto:...">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" class="cta-enabled" checked>
+                                    <span class="checkmark"></span>
+                                    Call-to-Action Bereich anzeigen
+                                </label>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </section>
+
+            <!-- FAQ verwalten -->
+            <section id="faq" class="admin-section">
+                <div class="section-header">
+                    <h1>FAQ verwalten</h1>
+                    <button class="primary-btn">
+                        <i class="fas fa-plus"></i> Neue Frage hinzufügen
+                    </button>
+                </div>
+                
+                <div class="faq-manager">
+                    <!-- Bestehende FAQ-Einträge -->
+                    <div class="faq-item-admin">
+                        <div class="faq-header">
+                            <h4>Sind eure Riegel vegetarisch?</h4>
+                            <div class="faq-actions">
+                                <button class="edit-btn"><i class="fas fa-edit"></i> Bearbeiten</button>
+                                <button class="delete-btn"><i class="fas fa-trash"></i> Löschen</button>
+                            </div>
+                        </div>
+                        <div class="faq-content-preview">
+                            <p>Ja, alle unsere Produkte sind zu 100% vegetarisch. Wir verwenden keine tierischen Produkte außer Milchprodukten und Eiern in einigen unserer Cremes.</p>
+                        </div>
+                        <div class="faq-edit-form" style="display: none;">
+                            <label>Frage:</label>
+                            <input type="text" value="Sind eure Riegel vegetarisch?" class="faq-question-input">
+                            <label>Antwort:</label>
+                            <textarea rows="4" class="faq-answer-input">Ja, alle unsere Produkte sind zu 100% vegetarisch. Wir verwenden keine tierischen Produkte außer Milchprodukten und Eiern in einigen unserer Cremes.</textarea>
+                            <div class="form-actions">
+                                <button class="primary-btn save-faq-btn">Speichern</button>
+                                <button class="secondary-btn cancel-faq-btn">Abbrechen</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item-admin">
+                        <div class="faq-header">
+                            <h4>Bietet ihr auch glutenfreie Optionen an?</h4>
+                            <div class="faq-actions">
+                                <button class="edit-btn"><i class="fas fa-edit"></i> Bearbeiten</button>
+                                <button class="delete-btn"><i class="fas fa-trash"></i> Löschen</button>
+                            </div>
+                        </div>
+                        <div class="faq-content-preview">
+                            <p>Derzeit haben wir noch keine glutenfreien Riegelböden im Angebot, arbeiten aber daran, unser Sortiment zu erweitern. Bleibt dran!</p>
+                        </div>
+                        <div class="faq-edit-form" style="display: none;">
+                            <label>Frage:</label>
+                            <input type="text" value="Bietet ihr auch glutenfreie Optionen an?" class="faq-question-input">
+                            <label>Antwort:</label>
+                            <textarea rows="4" class="faq-answer-input">Derzeit haben wir noch keine glutenfreien Riegelböden im Angebot, arbeiten aber daran, unser Sortiment zu erweitern. Bleibt dran!</textarea>
+                            <div class="form-actions">
+                                <button class="primary-btn save-faq-btn">Speichern</button>
+                                <button class="secondary-btn cancel-faq-btn">Abbrechen</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item-admin">
+                        <div class="faq-header">
+                            <h4>Gibt es Allergie-Warnungen? ⚠️</h4>
+                            <div class="faq-actions">
+                                <button class="edit-btn"><i class="fas fa-edit"></i> Bearbeiten</button>
+                                <button class="delete-btn"><i class="fas fa-trash"></i> Löschen</button>
+                            </div>
+                        </div>
+                        <div class="faq-content-preview">
+                            <p>Ja! Alle unsere Produkte werden deutlich mit Allergie-Warnungen gekennzeichnet. Wir informieren dich über alle enthaltenen Allergene wie Nüsse, Gluten, Milchprodukte etc.</p>
+                        </div>
+                        <div class="faq-edit-form" style="display: none;">
+                            <label>Frage:</label>
+                            <input type="text" value="Gibt es Allergie-Warnungen? ⚠️" class="faq-question-input">
+                            <label>Antwort:</label>
+                            <textarea rows="4" class="faq-answer-input">Ja! Alle unsere Produkte werden deutlich mit Allergie-Warnungen gekennzeichnet. Wir informieren dich über alle enthaltenen Allergene wie Nüsse, Gluten, Milchprodukte etc.</textarea>
+                            <div class="form-actions">
+                                <button class="primary-btn save-faq-btn">Speichern</button>
+                                <button class="secondary-btn cancel-faq-btn">Abbrechen</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Neue FAQ hinzufügen Form -->
+                    <div class="add-faq-form" style="display: none;">
+                        <h3>Neue FAQ hinzufügen</h3>
+                        <label>Frage:</label>
+                        <input type="text" placeholder="Wie lautet die Frage?" class="new-faq-question">
+                        <label>Antwort:</label>
+                        <textarea rows="4" placeholder="Antwort auf die Frage..." class="new-faq-answer"></textarea>
+                        <div class="form-actions">
+                            <button class="primary-btn add-faq-save-btn">FAQ hinzufügen</button>
+                            <button class="secondary-btn add-faq-cancel-btn">Abbrechen</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Häufige FAQ-Vorlagen -->
+                    <div class="faq-templates">
+                        <h3>Häufige FAQ-Vorlagen</h3>
+                        <div class="template-buttons">
+                            <button class="template-btn" data-question="Was kostet ein Basis-Riegel?" data-answer="Unsere Basis-Riegel kosten ab 4,50€. Jede zusätzliche Creme oder Topping kostet extra.">
+                                <i class="fas fa-euro-sign"></i> Preise
+                            </button>
+                            <button class="template-btn" data-question="Wie lange dauert die Zubereitung?" data-answer="Die Zubereitung deines individuellen Riegels dauert etwa 3-5 Minuten. Bei Events planen wir mehr Zeit ein.">
+                                <i class="fas fa-clock"></i> Dauer
+                            </button>
+                            <button class="template-btn" data-question="Sind die Zutaten bio?" data-answer="Wir verwenden wo möglich Bio-Zutaten und achten auf höchste Qualität bei allen Produkten.">
+                                <i class="fas fa-leaf"></i> Bio-Qualität
+                            </button>
+                            <button class="template-btn" data-question="Kann ich Riegel vorbestellen?" data-answer="Ja! Für Events und größere Bestellungen nehmen wir gerne Vorbestellungen entgegen.">
+                                <i class="fas fa-shopping-cart"></i> Vorbestellung
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Event-Banner verwalten -->
+            <section id="banners" class="admin-section">
+                <div class="section-header">
+                    <h1>Event-Banner verwalten</h1>
+                    <button class="primary-btn">
+                        <i class="fas fa-plus"></i> Neuen Banner erstellen
+                    </button>
+                </div>
+                
+                <div class="banner-manager">
+                    <!-- Aktive Banner -->
+                    <div class="banner-section">
+                        <h3><i class="fas fa-eye"></i> Aktive Banner</h3>
+                        
+                        <div class="banner-item active-banner" data-banner-id="launch">
+                            <div class="banner-preview">
+                                <div class="banner-content launch-banner">
+                                    <div class="banner-icon">
+                                        <i class="fas fa-rocket"></i>
+                                    </div>
+                                    <div class="banner-text">
+                                        <h4>🎉 MoreMori Launch Event!</h4>
+                                        <p>Feiere mit uns die Eröffnung am 1. November! Erste 50 Besucher erhalten 20% Rabatt!</p>
+                                    </div>
+                                    <button class="banner-cta">Jetzt dabei sein!</button>
+                                </div>
+                            </div>
+                            <div class="banner-controls">
+                                <div class="banner-status">
+                                    <span class="status-badge active">Aktiv</span>
+                                    <span class="banner-stats">156 Klicks</span>
+                                </div>
+                                <div class="banner-actions">
+                                    <label class="toggle-banner">
+                                        <input type="checkbox" checked class="banner-toggle">
+                                        <span class="toggle-slider"></span>
+                                    </label>
+                                    <button class="edit-banner-btn"><i class="fas fa-edit"></i> Bearbeiten</button>
+                                    <button class="delete-banner-btn"><i class="fas fa-trash"></i> Löschen</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Inaktive/Geplante Banner -->
+                    <div class="banner-section">
+                        <h3><i class="fas fa-eye-slash"></i> Inaktive Banner</h3>
+                        
+                        <div class="banner-item inactive-banner" data-banner-id="xmas">
+                            <div class="banner-preview">
+                                <div class="banner-content xmas-banner">
+                                    <div class="banner-icon">
+                                        <i class="fas fa-gift"></i>
+                                    </div>
+                                    <div class="banner-text">
+                                        <h4>🎄 Weihnachts-Special</h4>
+                                        <p>Süße Weihnachtsriegel mit festlichen Cremes - perfekt für die Feiertage!</p>
+                                    </div>
+                                    <button class="banner-cta">Jetzt vorbestellen</button>
+                                </div>
+                            </div>
+                            <div class="banner-controls">
+                                <div class="banner-status">
+                                    <span class="status-badge inactive">Inaktiv</span>
+                                    <span class="banner-stats">Geplant für Dezember</span>
+                                </div>
+                                <div class="banner-actions">
+                                    <label class="toggle-banner">
+                                        <input type="checkbox" class="banner-toggle">
+                                        <span class="toggle-slider"></span>
+                                    </label>
+                                    <button class="edit-banner-btn"><i class="fas fa-edit"></i> Bearbeiten</button>
+                                    <button class="delete-banner-btn"><i class="fas fa-trash"></i> Löschen</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Banner-Typen Templates -->
+                    <div class="banner-templates">
+                        <h3>Banner-Vorlagen</h3>
+                        <div class="template-grid">
+                            <div class="banner-template" data-type="launch">
+                                <div class="template-preview">
+                                    <i class="fas fa-rocket"></i>
+                                    <h4>Launch Event</h4>
+                                    <p>Für Eröffnungen und neue Produkte</p>
+                                </div>
+                                <button class="use-template-btn">Verwenden</button>
+                            </div>
+                            
+                            <div class="banner-template" data-type="promotion">
+                                <div class="template-preview">
+                                    <i class="fas fa-percent"></i>
+                                    <h4>Promotion/Rabatt</h4>
+                                    <p>Für Aktionen und Rabatte</p>
+                                </div>
+                                <button class="use-template-btn">Verwenden</button>
+                            </div>
+                            
+                            <div class="banner-template" data-type="seasonal">
+                                <div class="template-preview">
+                                    <i class="fas fa-snowflake"></i>
+                                    <h4>Saisonal</h4>
+                                    <p>Für saisonale Angebote</p>
+                                </div>
+                                <button class="use-template-btn">Verwenden</button>
+                            </div>
+                            
+                            <div class="banner-template" data-type="announcement">
+                                <div class="template-preview">
+                                    <i class="fas fa-bullhorn"></i>
+                                    <h4>Ankündigung</h4>
+                                    <p>Für wichtige Mitteilungen</p>
+                                </div>
+                                <button class="use-template-btn">Verwenden</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Banner-Editor Modal -->
+                <div class="banner-editor-modal" style="display: none;">
+                    <div class="modal-content banner-modal">
+                        <div class="modal-header">
+                            <h3>Banner bearbeiten</h3>
+                            <button class="modal-close">&times;</button>
+                        </div>
+                        
+                        <div class="banner-editor">
+                            <div class="editor-left">
+                                <form class="banner-form">
+                                    <label>Banner-Typ:</label>
+                                    <select class="banner-type-select">
+                                        <option value="launch">Launch Event</option>
+                                        <option value="promotion">Promotion/Rabatt</option>
+                                        <option value="seasonal">Saisonal</option>
+                                        <option value="announcement">Ankündigung</option>
+                                    </select>
+                                    
+                                    <label>Titel:</label>
+                                    <input type="text" class="banner-title-input" placeholder="z.B. 🎉 MoreMori Launch Event!" required>
+                                    
+                                    <label>Nachricht:</label>
+                                    <textarea rows="3" class="banner-message-input" placeholder="Deine Nachricht hier..." required></textarea>
+                                    
+                                    <label>Button-Text:</label>
+                                    <input type="text" class="banner-cta-input" placeholder="z.B. Jetzt dabei sein!">
+                                    
+                                    <label>Button-Link:</label>
+                                    <input type="url" class="banner-link-input" placeholder="https://...">
+                                    
+                                    <div class="banner-settings">
+                                        <label class="toggle-item">
+                                            <input type="checkbox" class="banner-auto-hide">
+                                            <span class="toggle-slider"></span>
+                                            Automatisch ausblenden nach 7 Tagen
+                                        </label>
+                                        
+                                        <label class="toggle-item">
+                                            <input type="checkbox" class="banner-dismissible" checked>
+                                            <span class="toggle-slider"></span>
+                                            Benutzer kann Banner schließen
+                                        </label>
+                                    </div>
+                                </form>
+                            </div>
+                            
+                            <div class="editor-right">
+                                <h4>Live-Vorschau</h4>
+                                <div class="banner-live-preview">
+                                    <div class="preview-banner">
+                                        <div class="banner-icon">
+                                            <i class="fas fa-rocket"></i>
+                                        </div>
+                                        <div class="banner-text">
+                                            <h4>🎉 MoreMori Launch Event!</h4>
+                                            <p>Feiere mit uns die Eröffnung am 1. November! Erste 50 Besucher erhalten 20% Rabatt!</p>
+                                        </div>
+                                        <button class="banner-cta">Jetzt dabei sein!</button>
+                                        <button class="banner-close">&times;</button>
+                                    </div>
+                                </div>
+                                
+                                <div class="banner-positioning">
+                                    <label>Position auf Website:</label>
+                                    <select class="banner-position-select">
+                                        <option value="top">Oben (Header)</option>
+                                        <option value="hero">Nach Hero-Bereich</option>
+                                        <option value="before-contact">Vor Kontakt-Bereich</option>
+                                        <option value="popup" selected>Popup (Overlay)</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="modal-actions">
+                            <button class="primary-btn save-banner-btn">Banner speichern</button>
+                            <button class="secondary-btn preview-banner-btn">Vorschau anzeigen</button>
+                            <button class="secondary-btn cancel-banner-btn">Abbrechen</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Weitere Sektionen werden über JavaScript ein-/ausgeblendet -->
+            <section id="settings" class="admin-section">
+                <div class="section-header">
+                    <h1>Einstellungen</h1>
+                </div>
+                
+                <div class="settings-grid">
+                    <div class="setting-card">
+                        <h4>Kontaktdaten</h4>
+                        <label>Telefonnummer</label>
+                        <input type="tel" value="+49 123 456 7890" class="setting-input">
+                        <label>E-Mail</label>
+                        <input type="email" value="info@moremori.de" class="setting-input">
+                        <label>WhatsApp-Nummer</label>
+                        <input type="tel" value="+49 123 456 7890" class="setting-input">
+                    </div>
+                    
+                    <div class="setting-card">
+                        <h4>Social Media</h4>
+                        <label>Instagram URL</label>
+                        <input type="url" placeholder="https://instagram.com/moremori" class="setting-input">
+                        <label>Facebook URL</label>
+                        <input type="url" placeholder="https://facebook.com/moremori" class="setting-input">
+                    </div>
+                    
+                    <div class="setting-card">
+                        <h4>Website-Einstellungen</h4>
+                        <label class="toggle-item">
+                            <input type="checkbox" checked>
+                            <span class="toggle-slider"></span>
+                            Newsletter-Anmeldung aktiviert
+                        </label>
+                        <label class="toggle-item">
+                            <input type="checkbox" checked>
+                            <span class="toggle-slider"></span>
+                            Kontaktformular aktiviert
+                        </label>
+                        <label class="toggle-item">
+                            <input type="checkbox">
+                            <span class="toggle-slider"></span>
+                            Wartungsmodus
+                        </label>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="admin-script.js"></script>
+</body>
+</html>

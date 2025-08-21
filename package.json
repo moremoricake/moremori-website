@@ -1,0 +1,36 @@
+{
+  "name": "moremori-website",
+  "version": "1.0.0",
+  "description": "MoreMori - Ulms erste interaktive Cake-Bar",
+  "main": "index.html",
+  "scripts": {
+    "dev": "netlify dev",
+    "build": "echo 'Building MoreMori...'",
+    "deploy": "netlify deploy --prod",
+    "test": "echo 'Tests coming soon...'"
+  },
+  "keywords": [
+    "cake-bar",
+    "ulm",
+    "interactive",
+    "dessert",
+    "events"
+  ],
+  "author": "MoreMori Team",
+  "license": "MIT",
+  "dependencies": {
+    "@supabase/supabase-js": "^2.38.0"
+  },
+  "devDependencies": {
+    "netlify-cli": "^17.0.0",
+    "@netlify/plugin-sitemap": "^0.8.1"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/moremori-website.git"
+  },
+  "homepage": "https://moremori.netlify.app"
+}

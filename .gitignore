@@ -1,0 +1,89 @@
+# MoreMori .gitignore
+
+# Supabase Configuration (WICHTIG: Niemals committen!)
+# Sensitive configuration files
+supabase-config.php
+.env
+.env.local
+.env.production
+
+# Node.js dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Netlify
+.netlify/
+# Local Netlify folder
+.netlify
+
+# Editor directories and files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Temporary files
+tmp/
+temp/
+
+# PHP specific (für lokale Entwicklung)
+*.php~
+*.php.bak
+
+# Development files
+test-supabase.php
+
+# Old backend files
+admin-backend.php
+data.json
+logs.json
+
+# Upload directories
+uploads/
+backups/
+
+# System files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs
+*.log
+error_log
+
+# Temporary files
+*.tmp
+*.temp
+~*
+
+# Node modules (falls später verwendet)
+node_modules/
+
+# Environment files
+.env
+.env.local
+.env.production
+
+# Build output
+dist/
+build/

@@ -1,0 +1,73 @@
+# MoreMori Netlify Configuration
+[build]
+  # Build-Befehl (optional, da wir statische Dateien haben)
+  command = "echo 'Building MoreMori website...'"
+  
+  # Ordner mit den zu deployenden Dateien
+  publish = "."
+  
+  # Netlify Functions Ordner
+  functions = "netlify/functions"
+
+# Umleitung für API-Calls zu Netlify Functions
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/:splat"
+  status = 200
+
+# Umleitung für supabase-backend.php zu Netlify Function
+[[redirects]]
+  from = "/supabase-backend.php"
+  to = "/.netlify/functions/supabase-api"
+  status = 200
+
+# SPA Fallback für React/Vue Apps (optional)
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+  conditions = {Role = ["admin"]}
+
+# Headers für bessere Performance und Sicherheit
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "max-age=31536000"
+
+[[headers]]
+  for = "*.css"
+  [headers.values]
+    Cache-Control = "max-age=31536000"
+
+[[headers]]
+  for = "*.js"
+  [headers.values]
+    Cache-Control = "max-age=31536000"
+
+[[headers]]
+  for = "*.woff2"
+  [headers.values]
+    Cache-Control = "max-age=31536000"
+
+# Environment Variables (werden in Netlify Dashboard gesetzt)
+[build.environment]
+  NODE_VERSION = "18"
+
+# Plugin für bessere Build-Performance
+[[plugins]]
+  package = "@netlify/plugin-sitemap"
+
+# Dev Server Konfiguration für lokales Testen
+[dev]
+  command = "echo 'Starting MoreMori dev server...'"
+  port = 8888
+  publish = "."
+  functions = "netlify/functions"
