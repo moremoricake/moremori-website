@@ -1,28 +1,41 @@
 /* MoreMori Landing Page CSS Version 2.0 */
 
-/* CSS-Variablen für einfache Anpassung */
+/* CSS-Variablen für einfache Anpassung - Option A: Sweet Bakery */
 :root {
-    --primary-color: #FFF8E1; /* Helles Creme */
-    --primary-gradient: linear-gradient(135deg, #FFF8E1 0%, #F5E6A3 50%, #EED9C4 100%);
-    --secondary-color: #8B4513; /* Satter Braun */
-    --accent-color: #E91E63; /* Lebendiges Pink */
-    --accent-gradient: linear-gradient(135deg, #E91E63 0%, #FF6B9D 50%, #C44569 100%);
+    /* Sweet Bakery Farbpalette - Fröhlich & Frisch */
+    --primary-color: #FFFEF7; /* Reines, warmes Weiß */
+    --cream-accent: #FFF8DC; /* Cornsilk - sanftes Creme */
+    --sweet-pink: #FF69B4; /* Hot Pink - lebendiger */
+    --berry-red: #DC143C; /* Crimson - kraftvoll */
+    --caramel-brown: #D2691E; /* Chocolate - wärmer */
+    --vanilla-yellow: #FFFACD; /* Lemon Chiffon - heller */
+    --mint-green: #98FB98; /* Pale Green - frisch */
+    
+    /* Kompatibilität mit bestehenden Variablen */
+    --secondary-color: var(--caramel-brown);
+    --accent-color: var(--sweet-pink);
     --dark-text-color: #2C1810;
     --light-text-color: #FFFFFF;
-    --hero-overlay-color: rgba(44, 24, 16, 0.6);
-    --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    --hover-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+    --hero-overlay-color: rgba(44, 24, 16, 0.4); /* Heller für mehr Fröhlichkeit */
     
-    /* Moderne Gradient-Sammlung */
-    --hero-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    --warm-gradient: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
-    --cool-gradient: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
-    --sunset-gradient: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
-    --ocean-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    --card-gradient: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 248, 225, 0.95) 100%);
-    --button-gradient: linear-gradient(135deg, #ff6b9d 0%, #c44569 100%);
-    --hero-overlay-gradient: linear-gradient(135deg, rgba(44, 24, 16, 0.7) 0%, rgba(139, 69, 19, 0.5) 100%);
-    --glass-gradient: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+    /* Verbesserte Schatten - weicher und natürlicher */
+    --card-shadow: 0 12px 40px rgba(255, 105, 180, 0.08), 0 4px 12px rgba(0, 0, 0, 0.06);
+    --hover-shadow: 0 20px 60px rgba(255, 105, 180, 0.12), 0 8px 20px rgba(0, 0, 0, 0.08);
+    
+    /* Sweet Bakery Gradient-Sammlung - Fröhlich & Modern */
+    --primary-gradient: linear-gradient(135deg, var(--primary-color) 0%, var(--cream-accent) 50%, var(--vanilla-yellow) 100%);
+    --sweet-gradient: linear-gradient(135deg, var(--sweet-pink) 0%, #FFB6C1 50%, #FFC0CB 100%);
+    --warm-gradient: linear-gradient(135deg, var(--vanilla-yellow) 0%, var(--cream-accent) 50%, #FFEFD5 100%);
+    --cool-gradient: linear-gradient(135deg, var(--mint-green) 0%, #F0FFF0 50%, #E0FFFF 100%);
+    --sunset-gradient: linear-gradient(135deg, #FFE4B5 0%, #FFDAB9 50%, #FFE4E1 100%);
+    --berry-gradient: linear-gradient(135deg, var(--berry-red) 0%, #FF6347 50%, #FF69B4 100%);
+    --caramel-gradient: linear-gradient(135deg, var(--caramel-brown) 0%, #DEB887 50%, #F4A460 100%);
+    
+    /* UI-spezifische Gradienten */
+    --card-gradient: linear-gradient(135deg, rgba(255, 254, 247, 0.98) 0%, rgba(255, 248, 220, 0.95) 100%);
+    --button-gradient: linear-gradient(135deg, var(--sweet-pink) 0%, #FF1493 100%);
+    --hero-overlay-gradient: linear-gradient(135deg, rgba(44, 24, 16, 0.3) 0%, rgba(210, 105, 30, 0.4) 100%);
+    --glass-gradient: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 248, 220, 0.1) 100%);
 
     --font-family: 'Inter', sans-serif;
     --font-size-base: 16px;

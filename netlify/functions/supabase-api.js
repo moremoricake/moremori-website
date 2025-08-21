@@ -114,10 +114,10 @@ async function handleGet(type, id) {
         case 'calendar': {
             const { data, error } = id 
                 ? await client.from('calendar_events').select('*').eq('id', id).single()
-                : await client.from('calendar_events').select('*').order('created_at', { ascending: false });
+                : await client.from('calendar_events').select('*');
             
             if (error) throw error;
-            return data;
+            return data || [];
         }
 
         case 'banners': {
