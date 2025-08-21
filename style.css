@@ -43,7 +43,14 @@
     --text-font-weight: 400;
 
     --transition-speed: 0.4s;
-    --border-radius: 16px;
+    --border-radius: 24px; /* Größere, fröhlichere Border-Radius */
+    --border-radius-small: 16px;
+    --border-radius-large: 32px;
+    
+    /* Spacing & Layout Verbesserungen */
+    --section-padding: 100px; /* Mehr Weißraum zwischen Sektionen */
+    --container-padding: 40px; /* Mehr seitliches Padding */
+    --card-padding: 40px; /* Mehr Padding in Karten */
 }
 
 /* Allgemeine Stile & Typografie */
@@ -95,9 +102,9 @@ body::after {
 
 /* Verbesserter Container - nicht zu breit */
 .container {
-    max-width: 1100px;
+    max-width: 1200px; /* Breiterer Container für bessere Proportionen */
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 0 var(--container-padding);
     position: relative;
 }
 
@@ -132,7 +139,7 @@ body::after {
 }
 
 .section {
-    padding: 80px 0;
+    padding: var(--section-padding) 0;
     text-align: center;
     overflow: hidden; /* Für Scroll-Animationen */
 }
@@ -388,9 +395,9 @@ body::after {
     background: var(--card-gradient);
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 16px;
-    padding: 30px;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    border-radius: var(--border-radius);
+    padding: var(--card-padding);
+    box-shadow: var(--card-shadow);
     transition: all 0.3s ease-in-out;
 }
 

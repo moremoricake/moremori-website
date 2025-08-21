@@ -257,8 +257,7 @@ async function handleCreate(type, data) {
                     link_url: data.link_url || '#',
                     position: data.position || 'popup',
                     is_active: data.is_active !== false,
-                    dismissible: data.dismissible !== false,
-                    auto_hide_seconds: data.auto_hide_seconds || null
+                    dismissible: data.dismissible !== false
                 }])
                 .select()
                 .single();
@@ -379,7 +378,6 @@ async function handleUpdate(type, id, data) {
                 ...(data.position && { position: data.position }),
                 ...(data.is_active !== undefined && { is_active: data.is_active }),
                 ...(data.dismissible !== undefined && { dismissible: data.dismissible }),
-                ...(data.auto_hide_seconds !== undefined && { auto_hide_seconds: data.auto_hide_seconds }),
                 updated_at: new Date().toISOString()
             };
 

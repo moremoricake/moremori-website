@@ -1,0 +1,418 @@
+/* Sweet Bakery Animations & Cupcake Loading States */
+
+/* Cupcake Loading Animation */
+@keyframes cupcakeRotate {
+    0% { transform: rotate(0deg) scale(1); }
+    25% { transform: rotate(90deg) scale(1.1); }
+    50% { transform: rotate(180deg) scale(1); }
+    75% { transform: rotate(270deg) scale(1.1); }
+    100% { transform: rotate(360deg) scale(1); }
+}
+
+@keyframes cupcakeBounce {
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+    40% { transform: translateY(-10px); }
+    60% { transform: translateY(-5px); }
+}
+
+@keyframes cupcakeGlow {
+    0%, 100% { 
+        filter: drop-shadow(0 0 5px rgba(255, 105, 180, 0.3));
+        transform: scale(1);
+    }
+    50% { 
+        filter: drop-shadow(0 0 15px rgba(255, 105, 180, 0.6));
+        transform: scale(1.05);
+    }
+}
+
+/* Cookie Crumble Animation */
+@keyframes cookieCrumble {
+    0% { 
+        transform: rotate(0deg) scale(1);
+        opacity: 1;
+    }
+    25% { 
+        transform: rotate(90deg) scale(1.1);
+        opacity: 0.8;
+    }
+    50% { 
+        transform: rotate(180deg) scale(0.9);
+        opacity: 0.6;
+    }
+    75% { 
+        transform: rotate(270deg) scale(1.1);
+        opacity: 0.8;
+    }
+    100% { 
+        transform: rotate(360deg) scale(1);
+        opacity: 1;
+    }
+}
+
+/* Loading Spinner mit Cupcake */
+.cupcake-loader {
+    display: inline-block;
+    font-size: 2rem;
+    animation: cupcakeRotate 2s linear infinite, cupcakeGlow 1.5s ease-in-out infinite;
+    color: var(--sweet-pink);
+    margin: 20px;
+}
+
+.cupcake-bouncer {
+    display: inline-block;
+    font-size: 1.5rem;
+    animation: cupcakeBounce 1s ease-in-out infinite;
+    color: var(--berry-red);
+}
+
+/* Cookie Loading Animation */
+.cookie-loader {
+    display: inline-block;
+    font-size: 2rem;
+    animation: cookieCrumble 1.8s ease-in-out infinite;
+    color: var(--caramel-brown);
+}
+
+/* Loading Container */
+.sweet-loading-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, 
+        var(--primary-color) 0%, 
+        var(--cream-accent) 50%, 
+        var(--vanilla-yellow) 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    opacity: 1;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+.sweet-loading-container.fade-out {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.loading-text {
+    margin-top: 20px;
+    font-family: 'Fredoka', sans-serif;
+    font-size: 1.2rem;
+    color: var(--secondary-color);
+    font-weight: 600;
+    animation: cupcakeBounce 1.2s ease-in-out infinite;
+}
+
+/* Multi-Cupcake Animation */
+.cupcakes-parade {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.cupcakes-parade .cupcake-item {
+    font-size: 1.8rem;
+    animation: cupcakeBounce 1s ease-in-out infinite;
+}
+
+.cupcakes-parade .cupcake-item:nth-child(1) { animation-delay: 0s; color: var(--sweet-pink); }
+.cupcakes-parade .cupcake-item:nth-child(2) { animation-delay: 0.2s; color: var(--berry-red); }
+.cupcakes-parade .cupcake-item:nth-child(3) { animation-delay: 0.4s; color: var(--caramel-brown); }
+
+/* Parallax Animation Classes */
+.parallax-bg {
+    will-change: transform;
+    transition: transform 0.1s ease-out;
+}
+
+.parallax-slow { transform: translateY(0px); }
+.parallax-medium { transform: translateY(0px); }
+.parallax-fast { transform: translateY(0px); }
+
+/* Scroll-triggered Animations */
+@keyframes sweetSlideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-50px) rotate(-5deg);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0) rotate(0deg);
+    }
+}
+
+@keyframes sweetSlideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(50px) rotate(5deg);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0) rotate(0deg);
+    }
+}
+
+@keyframes sweetFadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes sweetBounceIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.3) rotate(-10deg);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.05) rotate(5deg);
+    }
+    70% {
+        transform: scale(0.95) rotate(-2deg);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) rotate(0deg);
+    }
+}
+
+/* Animation-Klassen für JavaScript */
+.animate-slide-in-left {
+    animation: sweetSlideInLeft 0.8s ease-out forwards;
+}
+
+.animate-slide-in-right {
+    animation: sweetSlideInRight 0.8s ease-out forwards;
+}
+
+.animate-fade-in-up {
+    animation: sweetFadeInUp 0.6s ease-out forwards;
+}
+
+.animate-bounce-in {
+    animation: sweetBounceIn 0.8s ease-out forwards;
+}
+
+/* Hover-Effekte für Comic Panels - Playful */
+@keyframes wiggle {
+    0%, 7% { transform: rotateZ(0deg); }
+    15% { transform: rotateZ(-15deg); }
+    20% { transform: rotateZ(10deg); }
+    25% { transform: rotateZ(-10deg); }
+    30% { transform: rotateZ(6deg); }
+    35% { transform: rotateZ(-4deg); }
+    40%, 100% { transform: rotateZ(0deg); }
+}
+
+.comic-panel.playful:hover {
+    animation: wiggle 0.8s ease-in-out;
+}
+
+/* Floating Elements */
+@keyframes float {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    33% { transform: translateY(-10px) rotate(1deg); }
+    66% { transform: translateY(-5px) rotate(-1deg); }
+}
+
+.floating-element {
+    animation: float 3s ease-in-out infinite;
+}
+
+/* Sweet Pulse Animation für CTA Buttons */
+@keyframes sweetPulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(255, 105, 180, 0.4);
+        transform: scale(1);
+    }
+    50% {
+        box-shadow: 0 0 0 10px rgba(255, 105, 180, 0);
+        transform: scale(1.02);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(255, 105, 180, 0);
+        transform: scale(1);
+    }
+}
+
+.cta-button.sweet-pulse {
+    animation: sweetPulse 2s infinite;
+}
+
+/* Sparkle Effect */
+@keyframes sparkle {
+    0%, 100% {
+        opacity: 0;
+        transform: scale(0) rotate(0deg);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1) rotate(180deg);
+    }
+}
+
+.sparkle-effect {
+    position: relative;
+    overflow: hidden;
+}
+
+.sparkle-effect::before {
+    content: '✨';
+    position: absolute;
+    top: 10%;
+    right: 10%;
+    animation: sparkle 2s ease-in-out infinite;
+    font-size: 0.8rem;
+    z-index: 1;
+}
+
+.sparkle-effect::after {
+    content: '⭐';
+    position: absolute;
+    bottom: 15%;
+    left: 15%;
+    animation: sparkle 2.5s ease-in-out infinite 0.5s;
+    font-size: 0.6rem;
+    z-index: 1;
+}
+
+/* Background Bubble Animation */
+@keyframes bubbleFloat {
+    0% {
+        transform: translateY(100vh) scale(0);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-100px) scale(1);
+        opacity: 0;
+    }
+}
+
+.background-bubbles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.bubble {
+    position: absolute;
+    border-radius: 50%;
+    background: radial-gradient(circle, 
+        rgba(255, 105, 180, 0.1) 0%, 
+        rgba(255, 192, 203, 0.05) 100%);
+    animation: bubbleFloat 8s linear infinite;
+}
+
+.bubble:nth-child(1) {
+    left: 10%;
+    width: 20px;
+    height: 20px;
+    animation-delay: 0s;
+    animation-duration: 8s;
+}
+
+.bubble:nth-child(2) {
+    left: 20%;
+    width: 15px;
+    height: 15px;
+    animation-delay: 2s;
+    animation-duration: 10s;
+}
+
+.bubble:nth-child(3) {
+    left: 35%;
+    width: 25px;
+    height: 25px;
+    animation-delay: 4s;
+    animation-duration: 7s;
+}
+
+.bubble:nth-child(4) {
+    left: 50%;
+    width: 18px;
+    height: 18px;
+    animation-delay: 1s;
+    animation-duration: 9s;
+}
+
+.bubble:nth-child(5) {
+    left: 70%;
+    width: 22px;
+    height: 22px;
+    animation-delay: 3s;
+    animation-duration: 8s;
+}
+
+.bubble:nth-child(6) {
+    left: 85%;
+    width: 16px;
+    height: 16px;
+    animation-delay: 5s;
+    animation-duration: 11s;
+}
+
+/* Responsive Animation Adjustments */
+@media (max-width: 768px) {
+    .cupcake-loader,
+    .cookie-loader {
+        font-size: 1.5rem;
+    }
+    
+    .loading-text {
+        font-size: 1rem;
+    }
+    
+    .cupcakes-parade .cupcake-item {
+        font-size: 1.4rem;
+    }
+    
+    /* Reduzierte Animationen für Performance auf Mobile */
+    .bubble {
+        animation-duration: 12s;
+    }
+    
+    .sweet-loading-container {
+        backdrop-filter: blur(5px);
+    }
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+    .cupcake-loader,
+    .cookie-loader,
+    .cupcake-bouncer,
+    .floating-element,
+    .bubble {
+        animation: none;
+    }
+    
+    .cta-button.sweet-pulse {
+        animation: none;
+    }
+    
+    .sparkle-effect::before,
+    .sparkle-effect::after {
+        animation: none;
+        opacity: 0.5;
+    }
+}
