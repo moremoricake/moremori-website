@@ -51,7 +51,7 @@ class MoreMoriSite {
 
     async loadBanners() {
         try {
-            const response = await fetch('supabase-backend.php?action=get&type=banners');
+            const response = await fetch('/.netlify/functions/supabase-api?action=get&type=banners');
             if (!response.ok) throw new Error('Failed to fetch banners');
             
             const banners = await response.json();
@@ -86,7 +86,7 @@ class MoreMoriSite {
 
     async loadPrices() {
         try {
-            const response = await fetch('supabase-backend.php?action=get&type=prices');
+            const response = await fetch('/.netlify/functions/supabase-api?action=get&type=prices');
             if (!response.ok) throw new Error('Failed to fetch prices');
             
             const pricesArray = await response.json();
@@ -135,7 +135,7 @@ class MoreMoriSite {
 
     async loadEvents() {
         try {
-            const response = await fetch('supabase-backend.php?action=get&type=calendar');
+            const response = await fetch('/.netlify/functions/supabase-api?action=get&type=calendar');
             if (!response.ok) throw new Error('Failed to fetch events');
             
             const calendarEvents = await response.json();
@@ -352,22 +352,27 @@ class MoreMoriSite {
             existingPricing.remove();
         }
 
+        // Check if we have event prices
+        const eventPrices = Object.values(this.prices.events);
+        if (eventPrices.length === 0) {
+            return; // No event prices to display
+        }
+
         const pricingElement = document.createElement('div');
         pricingElement.className = 'event-pricing';
-        pricingElement.innerHTML = `
-            <div class="pricing-cards">
+        
+        let pricingCards = '';
+        eventPrices.forEach(event => {
+            pricingCards += `
                 <div class="pricing-card">
-                    <h4>${this.prices.events.basic.name}</h4>
-                    <div class="price">${this.prices.events.basic.price.toFixed(2)}€</div>
-                    <p>${this.prices.events.basic.description}</p>
+                    <h4>${event.name}</h4>
+                    <div class="price">${event.price.toFixed(2)}€</div>
+                    <p>${event.description || 'Event-Paket'}</p>
                 </div>
-                <div class="pricing-card">
-                    <h4>${this.prices.events.premium.name}</h4>
-                    <div class="price">${this.prices.events.premium.price.toFixed(2)}€</div>
-                    <p>${this.prices.events.premium.description}</p>
-                </div>
-            </div>
-        `;
+            `;
+        });
+        
+        pricingElement.innerHTML = `<div class="pricing-cards">${pricingCards}</div>`;
 
         const eventButton = eventsSection.querySelector('.event-button');
         if (eventButton) {
@@ -383,8 +388,15 @@ class MoreMoriSite {
             existingPricing.remove();
         }
 
-        const avgBasePrice = Object.values(this.prices.bases).reduce((sum, item) => sum + item.price, 0) / Object.keys(this.prices.bases).length;
-        const avgCreamPrice = Object.values(this.prices.creams).reduce((sum, item) => sum + item.price, 0) / Object.keys(this.prices.creams).length;
+        const basePrices = Object.values(this.prices.bases);
+        const creamPrices = Object.values(this.prices.creams);
+        
+        if (basePrices.length === 0 || creamPrices.length === 0) {
+            return; // Not enough data for pricing
+        }
+        
+        const avgBasePrice = basePrices.reduce((sum, item) => sum + item.price, 0) / basePrices.length;
+        const avgCreamPrice = creamPrices.reduce((sum, item) => sum + item.price, 0) / creamPrices.length;
         const totalPrice = avgBasePrice + avgCreamPrice;
 
         const pricingElement = document.createElement('div');
