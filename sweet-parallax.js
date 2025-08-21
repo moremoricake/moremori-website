@@ -207,27 +207,7 @@ class SweetAnimationSystem {
     }
 
     addEventListeners() {
-        // Throttled Scroll Event für Performance
-        let ticking = false;
-        window.addEventListener('scroll', () => {
-            if (!ticking) {
-                requestAnimationFrame(() => {
-                    this.updateParallax();
-                    ticking = false;
-                });
-                ticking = true;
-            }
-        });
-
-        // Resize Event
-        window.addEventListener('resize', () => {
-            // Parallax bei kleinen Bildschirmen deaktivieren
-            if (window.innerWidth < 768) {
-                this.parallaxElements.forEach(el => {
-                    el.style.transform = '';
-                });
-            }
-        });
+        // Event Listeners nur für nicht-Parallax Features
 
         // Page Visibility API - Animationen pausieren wenn Tab nicht aktiv
         document.addEventListener('visibilitychange', () => {
@@ -331,4 +311,4 @@ function startCupcakeRain() {
     }, 10000);
 }
 
-console.log('🧁 Sweet Bakery Parallax System geladen! Drücke ↑↑↓↓←→←→BA für eine Überraschung! 🧁');
+console.log('🧁 Sweet Bakery Animation System geladen! Drücke ↑↑↓↓←→←→BA für eine Überraschung! 🧁');

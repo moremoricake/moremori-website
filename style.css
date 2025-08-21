@@ -48,9 +48,11 @@
     --border-radius-large: 32px;
     
     /* Spacing & Layout Verbesserungen */
-    --section-padding: 100px; /* Mehr Weißraum zwischen Sektionen */
+    --section-padding: 120px; /* Noch mehr Weißraum zwischen Sektionen */
+    --section-padding-large: 140px; /* Extra großer Weißraum für wichtige Sektionen */
     --container-padding: 40px; /* Mehr seitliches Padding */
     --card-padding: 40px; /* Mehr Padding in Karten */
+    --element-margin: 60px; /* Mehr Abstand zwischen Elementen */
 }
 
 /* Allgemeine Stile & Typografie */

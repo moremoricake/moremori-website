@@ -124,15 +124,7 @@
 .cupcakes-parade .cupcake-item:nth-child(2) { animation-delay: 0.2s; color: var(--berry-red); }
 .cupcakes-parade .cupcake-item:nth-child(3) { animation-delay: 0.4s; color: var(--caramel-brown); }
 
-/* Parallax Animation Classes */
-.parallax-bg {
-    will-change: transform;
-    transition: transform 0.1s ease-out;
-}
-
-.parallax-slow { transform: translateY(0px); }
-.parallax-medium { transform: translateY(0px); }
-.parallax-fast { transform: translateY(0px); }
+/* Parallax Animation Classes entfernt für bessere Performance */
 
 /* Scroll-triggered Animations */
 @keyframes sweetSlideInLeft {

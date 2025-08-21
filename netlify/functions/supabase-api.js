@@ -268,7 +268,6 @@ async function handleCreate(type, data) {
                 .insert([{
                     question: data.question,
                     answer: data.answer,
-                    category: data.category || 'general',
                     sort_order: data.sort_order || 0,
                     is_active: data.is_active !== false
                 }])
