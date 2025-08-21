@@ -119,10 +119,8 @@ class MoreMoriAdmin {
     updatePriceStats() {
         const priceCard = document.querySelector('[data-stat="prices"]');
         if (priceCard) {
-            const priceData = this.data.prices;
-            const totalItems = Object.keys(priceData.bases).length + 
-                             Object.keys(priceData.creams).length + 
-                             Object.keys(priceData.events).length;
+            const priceData = this.data.prices || [];
+            const totalItems = Array.isArray(priceData) ? priceData.length : 0;
             
             const statValue = priceCard.querySelector('.stat-value');
             const statSubtitle = priceCard.querySelector('.stat-subtitle');
@@ -209,18 +207,20 @@ class MoreMoriAdmin {
     }
 
     calculateAveragePrice() {
-        const prices = this.data.prices;
+        const prices = this.data.prices || [];
         let total = 0;
         let count = 0;
         
-        Object.values(prices).forEach(category => {
-            Object.values(category).forEach(price => {
-                total += price;
-                count++;
+        if (Array.isArray(prices)) {
+            prices.forEach(priceItem => {
+                if (priceItem.price && typeof priceItem.price === 'number') {
+                    total += priceItem.price;
+                    count++;
+                }
             });
-        });
+        }
         
-        return count > 0 ? total / count : 0;
+        return count > 0 ? total / count : 4.50; // Default fallback
     }
 
     getLastUpdateTime() {
