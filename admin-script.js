@@ -13,7 +13,7 @@ class MoreMoriAdmin {
             faq: [],
             settings: []
         };
-        this.apiEndpoint = 'supabase-backend.php';
+        this.apiEndpoint = '/.netlify/functions/supabase-api';
         
         this.init();
     }
