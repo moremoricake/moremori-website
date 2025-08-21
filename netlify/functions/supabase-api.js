@@ -369,11 +369,7 @@ async function handleUpdate(type, id, data) {
                 ...(data.title && { title: data.title }),
                 ...(data.message && { message: data.message }),
                 ...(data.banner_type && { banner_type: data.banner_type }),
-                ...(data.cta_text !== undefined && { cta_text: data.cta_text }),
-                ...(data.link_url !== undefined && { link_url: data.link_url }),
-                ...(data.position && { position: data.position }),
                 ...(data.is_active !== undefined && { is_active: data.is_active }),
-                ...(data.dismissible !== undefined && { dismissible: data.dismissible }),
                 updated_at: new Date().toISOString()
             };
 

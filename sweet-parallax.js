@@ -1,8 +1,7 @@
-// Sweet Bakery Parallax & Animation System
+// Sweet Bakery Animation System (ohne Parallax)
 class SweetAnimationSystem {
     constructor() {
         this.init();
-        this.setupParallax();
         this.setupScrollAnimations();
         this.setupLoadingAnimation();
         this.setupInteractiveEffects();
@@ -22,9 +21,6 @@ class SweetAnimationSystem {
         
         // Loading Screen erstellen
         this.createLoadingScreen();
-        
-        // Parallax-Elemente identifizieren
-        this.parallaxElements = document.querySelectorAll('.hero-bg, .section');
         
         // Scroll-Animation Elemente
         this.scrollElements = document.querySelectorAll('.comic-panel, .testimonial-card, .section-title');
@@ -70,42 +66,7 @@ class SweetAnimationSystem {
         }
     }
 
-    setupParallax() {
-        // Parallax nur auf Desktop
-        if (window.innerWidth < 768) return;
-        
-        this.parallaxData = [
-            { element: '.hero-bg', speed: 0.5, direction: 'up' },
-            { element: '.konzept-section', speed: 0.3, direction: 'down' },
-            { element: '.philosophie-section', speed: 0.2, direction: 'up' },
-            { element: '.testimonials-section', speed: 0.4, direction: 'down' }
-        ];
-    }
-
-    updateParallax() {
-        if (window.innerWidth < 768) return;
-        
-        const scrollTop = window.pageYOffset;
-        
-        this.parallaxData.forEach(item => {
-            const elements = document.querySelectorAll(item.element);
-            elements.forEach(element => {
-                const rect = element.getBoundingClientRect();
-                const elementTop = rect.top + scrollTop;
-                const elementHeight = rect.height;
-                const windowHeight = window.innerHeight;
-                
-                // Nur animieren wenn Element sichtbar
-                if (rect.top < windowHeight && rect.bottom > 0) {
-                    const yPos = scrollTop - elementTop;
-                    const parallaxValue = yPos * item.speed;
-                    const direction = item.direction === 'up' ? -parallaxValue : parallaxValue;
-                    
-                    element.style.transform = `translateY(${direction}px)`;
-                }
-            });
-        });
-    }
+    // Parallax-Funktionen entfernt für bessere Performance
 
     setupScrollAnimations() {
         // Intersection Observer für Scroll-Animationen
