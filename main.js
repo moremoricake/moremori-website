@@ -41,7 +41,8 @@ class MoreMoriSite {
             await Promise.all([
                 this.loadBanners(),
                 this.loadPrices(),
-                this.loadEvents()
+                this.loadEvents(),
+                this.loadContent() // Content-Daten laden
             ]);
         } catch (error) {
             console.error('Fehler beim Laden der Daten:', error);
@@ -170,6 +171,98 @@ class MoreMoriSite {
         } catch (error) {
             console.error('Fehler beim Laden der Events:', error);
             this.events = []; // Fallback: keine Events
+        }
+    }
+
+    async loadContent() {
+        try {
+            const response = await fetch('/.netlify/functions/supabase-api?action=get&type=content');
+            if (!response.ok) throw new Error('Failed to fetch content');
+            
+            const contentArray = await response.json();
+            this.content = {};
+            
+            // Content-Daten in strukturierte Form bringen
+            contentArray.filter(item => item.is_active).forEach(item => {
+                const sectionKey = `${item.section}.${item.key}`;
+                this.content[sectionKey] = {
+                    title: item.title,
+                    content: item.content,
+                    section: item.section,
+                    key: item.key
+                };
+            });
+            
+            console.log('Content geladen:', Object.keys(this.content).length, 'Einträge');
+            
+            // Content sofort auf der Seite aktualisieren
+            this.updateContentOnPage();
+            
+        } catch (error) {
+            console.error('Fehler beim Laden der Inhalte:', error);
+            this.content = {}; // Fallback: kein dynamischer Content
+        }
+    }
+
+    // Content auf der Seite aktualisieren
+    updateContentOnPage() {
+        // Hero-Bereich aktualisieren
+        if (this.content['hero.title']) {
+            const heroTitle = document.querySelector('.hero h1, .hero .hero-title, .hero-content h1');
+            if (heroTitle) {
+                heroTitle.textContent = this.content['hero.title'].content;
+            }
+        }
+        
+        if (this.content['hero.subtitle']) {
+            const heroSubtitle = document.querySelector('.hero .hero-subtitle, .hero-content p, .hero p');
+            if (heroSubtitle) {
+                heroSubtitle.textContent = this.content['hero.subtitle'].content;
+            }
+        }
+        
+        // Über uns Bereich aktualisieren
+        if (this.content['about.text']) {
+            const aboutText = document.querySelector('#ueber-uns .section-content p, .about-text, .founder-text');
+            if (aboutText) {
+                aboutText.textContent = this.content['about.text'].content;
+            }
+        }
+        
+        // Weitere Content-Bereiche können hier hinzugefügt werden
+        this.updateProcessContent();
+        this.updateContactContent();
+        
+        console.log('✅ Content auf Seite aktualisiert');
+    }
+    
+    updateProcessContent() {
+        // 3-Schritte Prozess Texte aktualisieren
+        const steps = ['step1', 'step2', 'step3'];
+        steps.forEach((step, index) => {
+            if (this.content[`process.${step}`]) {
+                const stepElement = document.querySelector(`.comic-panel:nth-child(${index + 1}) h3, .step-${index + 1} h3`);
+                if (stepElement) {
+                    stepElement.textContent = this.content[`process.${step}`].content;
+                }
+            }
+        });
+    }
+    
+    updateContactContent() {
+        // Kontakt-Bereich aktualisieren
+        if (this.content['contact.title']) {
+            const contactTitle = document.querySelector('#kontakt h2, .contact-title');
+            if (contactTitle) {
+                contactTitle.textContent = this.content['contact.title'].content;
+            }
+        }
+        
+        if (this.content['contact.description']) {
+            const contactDesc = document.querySelector('#kontakt .section-content p, .contact-description');
+            if (contactDesc) {
+                contactDesc.textContent = this.content['contact.description'].content;
+            }
         }
     }
 
