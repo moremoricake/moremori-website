@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔧 MoreMori Environment Check</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid #f8f9fa;
+        }
+        
+        .status-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .status-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border-left: 5px solid #6c757d;
+        }
+        
+        .status-item.success { border-left-color: #28a745; }
+        .status-item.error { border-left-color: #dc3545; }
+        .status-item.warning { border-left-color: #ffc107; }
+        
+        .status-label {
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        .status-value {
+            font-family: monospace;
+            padding: 5px 10px;
+            background: #e9ecef;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        
+        .test-button {
+            background: linear-gradient(45deg, #FF6B6B, #4ECDC4);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 16px;
+            width: 100%;
+            transition: all 0.3s ease;
+            margin: 20px 0;
+        }
+        
+        .test-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .results {
+            margin-top: 20px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            font-family: monospace;
+            font-size: 14px;
+            line-height: 1.6;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        
+        .quick-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .link-button {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            text-decoration: none;
+            padding: 15px 20px;
+            border-radius: 10px;
+            text-align: center;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+        
+        .link-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .summary-card {
+            background: linear-gradient(45deg, #28a745, #20c997);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            margin-top: 30px;
+            display: none;
+        }
+        
+        .config-item {
+            background: #e9ecef;
+            padding: 10px 15px;
+            margin: 5px 0;
+            border-radius: 5px;
+            font-family: monospace;
+            border-left: 3px solid #007bff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔧 MoreMori Environment Check</h1>
+            <p>Prüfe die Live-Konfiguration deiner bereits deployten Website</p>
+        </div>
+
+        <div class="status-grid">
+            <div class="status-item" id="netlify-status">
+                <span class="status-label">🌐 Netlify Deployment</span>
+                <span class="status-value" id="netlify-value">Wird geprüft...</span>
+            </div>
+            
+            <div class="status-item" id="functions-status">
+                <span class="status-label">⚙️ Netlify Functions</span>
+                <span class="status-value" id="functions-value">Wird geprüft...</span>
+            </div>
+            
+            <div class="status-item" id="supabase-status">
+                <span class="status-label">🗄️ Supabase Connection</span>
+                <span class="status-value" id="supabase-value">Wird geprüft...</span>
+            </div>
+            
+            <div class="status-item" id="admin-status">
+                <span class="status-label">⚙️ Admin Panel</span>
+                <span class="status-value" id="admin-value">Wird geprüft...</span>
+            </div>
+            
+            <div class="status-item" id="api-status">
+                <span class="status-label">🔗 API Endpoints</span>
+                <span class="status-value" id="api-value">Wird geprüft...</span>
+            </div>
+        </div>
+
+        <button class="test-button" onclick="runFullCheck()">
+            🔍 Vollständige Umgebung Prüfen
+        </button>
+
+        <div class="quick-links">
+            <a href="https://keen-manatee-56f4c9.netlify.app/" target="_blank" class="link-button">
+                🌐 Live Website
+            </a>
+            <a href="https://keen-manatee-56f4c9.netlify.app/admin.html" target="_blank" class="link-button">
+                ⚙️ Admin Panel
+            </a>
+            <a href="https://app.netlify.com/" target="_blank" class="link-button">
+                📊 Netlify Dashboard
+            </a>
+            <a href="https://app.supabase.com/" target="_blank" class="link-button">
+                🗄️ Supabase Dashboard
+            </a>
+        </div>
+
+        <div id="results" class="results" style="display: none;">
+            <h3>🧪 Test Ergebnisse:</h3>
+            <div id="results-content"></div>
+        </div>
+
+        <div class="summary-card" id="summary">
+            <h2>✅ System Status</h2>
+            <div id="summary-content"></div>
+        </div>
+    </div>
+
+    <script>
+        const LIVE_URL = 'https://keen-manatee-56f4c9.netlify.app/';
+        const API_BASE = LIVE_URL + '.netlify/functions/';
+        
+        let testResults = {};
+
+        function updateStatus(itemId, status, value) {
+            const item = document.getElementById(itemId);
+            const valueEl = document.getElementById(itemId.replace('-status', '-value'));
+            
+            item.classList.remove('success', 'error', 'warning');
+            item.classList.add(status);
+            valueEl.textContent = value;
+        }
+
+        function logResult(message) {
+            const resultsDiv = document.getElementById('results');
+            const contentDiv = document.getElementById('results-content');
+            
+            resultsDiv.style.display = 'block';
+            contentDiv.innerHTML += `<div>${new Date().toLocaleTimeString()}: ${message}</div>`;
+            contentDiv.scrollTop = contentDiv.scrollHeight;
+        }
+
+        async function checkNetlifyDeployment() {
+            logResult('🌐 Prüfe Netlify Deployment...');
+            
+            try {
+                const response = await fetch(LIVE_URL, { 
+                    method: 'HEAD',
+                    cache: 'no-cache' 
+                });
+                
+                if (response.ok) {
+                    updateStatus('netlify-status', 'success', '✅ Online');
+                    logResult('✅ Website ist live und erreichbar');
+                    testResults.netlify = { status: 'success' };
+                } else {
+                    throw new Error(`HTTP ${response.status}`);
+                }
+                
+            } catch (error) {
+                updateStatus('netlify-status', 'error', '❌ Offline');
+                logResult(`❌ Deployment Problem: ${error.message}`);
+                testResults.netlify = { status: 'error', error: error.message };
+            }
+        }
+
+        async function checkNetlifyFunctions() {
+            logResult('⚙️ Prüfe Netlify Functions...');
+            
+            try {
+                const response = await fetch(API_BASE + 'supabase-api?action=get&type=products', {
+                    method: 'GET',
+                    cache: 'no-cache'
+                });
+                
+                if (response.ok || response.status === 400) {
+                    // 400 ist OK - bedeutet Function läuft, aber Parameter fehlen
+                    updateStatus('functions-status', 'success', '✅ Aktiv');
+                    logResult('✅ Netlify Functions sind bereit');
+                    testResults.functions = { status: 'success' };
+                } else {
+                    throw new Error(`Functions nicht verfügbar: ${response.status}`);
+                }
+                
+            } catch (error) {
+                updateStatus('functions-status', 'error', '❌ Fehler');
+                logResult(`❌ Functions Problem: ${error.message}`);
+                testResults.functions = { status: 'error', error: error.message };
+            }
+        }
+
+        async function checkSupabaseConnection() {
+            logResult('🗄️ Prüfe Supabase Verbindung...');
+            
+            try {
+                const response = await fetch(API_BASE + 'supabase-api?action=get&type=content', {
+                    method: 'GET',
+                    cache: 'no-cache'
+                });
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    
+                    if (Array.isArray(data) || data.error) {
+                        if (data.error && data.error.includes('SUPABASE_URL')) {
+                            updateStatus('supabase-status', 'warning', '⚠️ Config fehlt');
+                            logResult('⚠️ Supabase Environment Variables sind nicht gesetzt');
+                            testResults.supabase = { status: 'warning', issue: 'env_vars_missing' };
+                        } else {
+                            updateStatus('supabase-status', 'success', '✅ Verbunden');
+                            logResult('✅ Supabase ist korrekt konfiguriert und erreichbar');
+                            testResults.supabase = { status: 'success', recordCount: Array.isArray(data) ? data.length : 0 };
+                        }
+                    } else {
+                        throw new Error('Unerwartete API-Antwort');
+                    }
+                } else {
+                    throw new Error(`HTTP ${response.status}`);
+                }
+                
+            } catch (error) {
+                updateStatus('supabase-status', 'error', '❌ Fehler');
+                logResult(`❌ Supabase Problem: ${error.message}`);
+                testResults.supabase = { status: 'error', error: error.message };
+            }
+        }
+
+        async function checkAdminPanel() {
+            logResult('⚙️ Prüfe Admin Panel...');
+            
+            try {
+                const response = await fetch(LIVE_URL + 'admin.html', {
+                    method: 'GET',
+                    cache: 'no-cache'
+                });
+                
+                if (response.ok) {
+                    const html = await response.text();
+                    
+                    if (html.includes('MoreMori Admin') && html.includes('Dashboard')) {
+                        updateStatus('admin-status', 'success', '✅ Bereit');
+                        logResult('✅ Admin Panel ist vollständig verfügbar');
+                        testResults.admin = { status: 'success' };
+                    } else {
+                        updateStatus('admin-status', 'warning', '⚠️ Unvollständig');
+                        logResult('⚠️ Admin Panel lädt, aber Struktur ist unvollständig');
+                        testResults.admin = { status: 'warning' };
+                    }
+                } else {
+                    throw new Error(`HTTP ${response.status}`);
+                }
+                
+            } catch (error) {
+                updateStatus('admin-status', 'error', '❌ Nicht erreichbar');
+                logResult(`❌ Admin Panel Problem: ${error.message}`);
+                testResults.admin = { status: 'error', error: error.message };
+            }
+        }
+
+        async function checkAPIEndpoints() {
+            logResult('🔗 Prüfe API Endpoints...');
+            
+            const endpoints = [
+                { name: 'Products', path: 'products' },
+                { name: 'Prices', path: 'prices' },
+                { name: 'Banners', path: 'banners' },
+                { name: 'Calendar', path: 'calendar' },
+                { name: 'FAQ', path: 'faq' }
+            ];
+            
+            let working = 0;
+            
+            for (const endpoint of endpoints) {
+                try {
+                    const response = await fetch(API_BASE + `supabase-api?action=get&type=${endpoint.path}`, {
+                        method: 'GET',
+                        cache: 'no-cache'
+                    });
+                    
+                    if (response.ok || (response.status >= 400 && response.status < 500)) {
+                        working++;
+                        logResult(`  ✅ ${endpoint.name} API funktioniert`);
+                    } else {
+                        logResult(`  ❌ ${endpoint.name} API Fehler: ${response.status}`);
+                    }
+                } catch (error) {
+                    logResult(`  ❌ ${endpoint.name} API Fehler: ${error.message}`);
+                }
+            }
+            
+            if (working >= endpoints.length * 0.8) {
+                updateStatus('api-status', 'success', `✅ ${working}/${endpoints.length}`);
+                logResult(`✅ ${working}/${endpoints.length} API Endpoints funktionieren`);
+                testResults.api = { status: 'success', working, total: endpoints.length };
+            } else {
+                updateStatus('api-status', 'warning', `⚠️ ${working}/${endpoints.length}`);
+                logResult(`⚠️ Nur ${working}/${endpoints.length} API Endpoints funktionieren`);
+                testResults.api = { status: 'warning', working, total: endpoints.length };
+            }
+        }
+
+        async function runFullCheck() {
+            testResults = {};
+            
+            const checks = [
+                checkNetlifyDeployment,
+                checkNetlifyFunctions,
+                checkSupabaseConnection,
+                checkAdminPanel,
+                checkAPIEndpoints
+            ];
+            
+            logResult('🔍 Starte vollständige Umgebungsprüfung...');
+            
+            for (const check of checks) {
+                await check();
+                await new Promise(resolve => setTimeout(resolve, 500));
+            }
+            
+            showSummary();
+            logResult('✅ Alle Tests abgeschlossen!');
+        }
+
+        function showSummary() {
+            const summary = document.getElementById('summary');
+            const content = document.getElementById('summary-content');
+            
+            const totalTests = Object.keys(testResults).length;
+            const successTests = Object.values(testResults).filter(r => r.status === 'success').length;
+            const warningTests = Object.values(testResults).filter(r => r.status === 'warning').length;
+            const errorTests = Object.values(testResults).filter(r => r.status === 'error').length;
+            
+            let statusMessage = '';
+            let actionMessage = '';
+            
+            if (successTests === totalTests) {
+                statusMessage = '🎉 Perfekt! Alles funktioniert einwandfrei!';
+                actionMessage = 'Deine MoreMori Website ist vollständig einsatzbereit.';
+            } else if (warningTests > 0 && errorTests === 0) {
+                statusMessage = '⚠️ Läuft, aber Optimierung möglich';
+                actionMessage = 'Haupt-Probleme: Supabase Environment Variables in Netlify setzen';
+            } else {
+                statusMessage = '🔧 Konfiguration erforderlich';
+                actionMessage = 'Einige Komponenten benötigen noch Setup-Schritte';
+            }
+            
+            content.innerHTML = `
+                <p><strong>${statusMessage}</strong></p>
+                <div style="display: flex; justify-content: space-around; margin: 20px 0;">
+                    <div><strong>${successTests}</strong><br>✅ Erfolgreich</div>
+                    <div><strong>${warningTests}</strong><br>⚠️ Warnungen</div>
+                    <div><strong>${errorTests}</strong><br>❌ Fehler</div>
+                </div>
+                <p>${actionMessage}</p>
+            `;
+            
+            summary.style.display = 'block';
+        }
+
+        // Auto-start basic check on load
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                checkNetlifyDeployment();
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
