@@ -195,20 +195,42 @@
     animation: sweetBounceIn 0.8s ease-out forwards;
 }
 
-/* Hover-Effekte für Comic Panels - Playful */
-@keyframes wiggle {
-    0%, 7% { transform: rotateZ(0deg); }
-    15% { transform: rotateZ(-15deg); }
-    20% { transform: rotateZ(10deg); }
-    25% { transform: rotateZ(-10deg); }
-    30% { transform: rotateZ(6deg); }
-    35% { transform: rotateZ(-4deg); }
-    40%, 100% { transform: rotateZ(0deg); }
+/* Hover-Effekte für Comic Panels - Sanft */
+@keyframes gentleHover {
+    0% { transform: translateY(0) scale(1); }
+    100% { transform: translateY(-8px) scale(1.02); }
 }
 
-.comic-panel.playful:hover {
-    animation: wiggle 0.8s ease-in-out;
+@keyframes softGlow {
+    0% { box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); }
+    100% { box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15); }
 }
+
+.comic-panel:hover {
+    animation: gentleHover 0.3s ease-out forwards, softGlow 0.3s ease-out forwards;
+    cursor: pointer;
+}
+
+/* Sanfte Erscheinung der Comic Panels beim Laden */
+@keyframes fadeInGentle {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.comic-panel {
+    animation: fadeInGentle 0.6s ease-out forwards;
+    transition: all 0.3s ease;
+}
+
+.comic-panel:nth-child(1) { animation-delay: 0.1s; }
+.comic-panel:nth-child(2) { animation-delay: 0.2s; }
+.comic-panel:nth-child(3) { animation-delay: 0.3s; }
 
 /* Floating Elements */
 @keyframes float {
