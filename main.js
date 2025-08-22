@@ -42,7 +42,8 @@ class MoreMoriSite {
                 this.loadBanners(),
                 this.loadPrices(),
                 this.loadEvents(),
-                this.loadContent() // Content-Daten laden
+                this.loadContent(), // Content-Daten laden
+                this.loadProducts() // Produktbilder laden
             ]);
         } catch (error) {
             console.error('Fehler beim Laden der Daten:', error);
@@ -202,6 +203,124 @@ class MoreMoriSite {
             console.error('Fehler beim Laden der Inhalte:', error);
             this.content = {}; // Fallback: kein dynamischer Content
         }
+    }
+
+    async loadProducts() {
+        try {
+            const response = await fetch('/.netlify/functions/supabase-api?action=get&type=products');
+            if (!response.ok) throw new Error('Failed to fetch products');
+            
+            const productsArray = await response.json();
+            this.products = {};
+            
+            // Produktbilder nach Kategorien organisieren
+            productsArray.filter(product => product.is_active).forEach(product => {
+                // Bestimme Kategorie basierend auf Name oder expliziter Kategorie
+                let category = 'general';
+                const name = product.name.toLowerCase();
+                
+                if (name.includes('hero') || name.includes('hauptbild')) {
+                    category = 'hero';
+                } else if (name.includes('schritt') || name.includes('step') || name.includes('prozess')) {
+                    category = 'process';
+                } else if (name.includes('profil') || name.includes('gründer') || name.includes('über')) {
+                    category = 'profile';
+                } else if (name.includes('partner') || name.includes('logo')) {
+                    category = 'partners';
+                } else if (name.includes('galerie') || name.includes('instagram')) {
+                    category = 'gallery';
+                }
+                
+                if (!this.products[category]) {
+                    this.products[category] = [];
+                }
+                
+                this.products[category].push({
+                    id: product.id,
+                    name: product.name,
+                    description: product.description,
+                    imageUrl: product.image_url,
+                    altText: product.alt_text || product.name,
+                    sortOrder: product.sort_order || 0
+                });
+            });
+            
+            // Sortiere Bilder nach sortOrder
+            Object.keys(this.products).forEach(category => {
+                this.products[category].sort((a, b) => a.sortOrder - b.sortOrder);
+            });
+            
+            console.log('Produktbilder geladen:', Object.keys(this.products).map(cat => `${cat}: ${this.products[cat].length}`).join(', '));
+            
+            // Bilder sofort auf der Seite aktualisieren
+            this.updateImagesOnPage();
+            
+        } catch (error) {
+            console.error('Fehler beim Laden der Produktbilder:', error);
+            this.products = {}; // Fallback: keine dynamischen Bilder
+        }
+    }
+
+    // Bilder auf der Seite aktualisieren
+    updateImagesOnPage() {
+        // Hero-Bild aktualisieren
+        if (this.products.hero && this.products.hero.length > 0) {
+            const heroBg = document.querySelector('.hero-bg, .hero-section img');
+            if (heroBg) {
+                const heroImage = this.products.hero[0];
+                heroBg.src = heroImage.imageUrl;
+                heroBg.alt = heroImage.altText;
+                console.log('✅ Hero-Bild aktualisiert:', heroImage.name);
+            }
+        }
+        
+        // Prozess-Bilder aktualisieren (3-Schritte)
+        if (this.products.process && this.products.process.length > 0) {
+            const comicImages = document.querySelectorAll('.comic-img');
+            this.products.process.forEach((processImage, index) => {
+                if (comicImages[index]) {
+                    comicImages[index].src = processImage.imageUrl;
+                    comicImages[index].alt = processImage.altText;
+                    console.log(`✅ Prozess-Bild ${index + 1} aktualisiert:`, processImage.name);
+                }
+            });
+        }
+        
+        // Profil-Bild aktualisieren
+        if (this.products.profile && this.products.profile.length > 0) {
+            const profilePhoto = document.querySelector('.profile-photo');
+            if (profilePhoto) {
+                const profileImage = this.products.profile[0];
+                profilePhoto.src = profileImage.imageUrl;
+                profilePhoto.alt = profileImage.altText;
+                console.log('✅ Profil-Bild aktualisiert:', profileImage.name);
+            }
+        }
+        
+        // Partner-Logos aktualisieren
+        if (this.products.partners && this.products.partners.length > 0) {
+            const partnerLogos = document.querySelectorAll('.partner-logos img');
+            this.products.partners.forEach((partnerImage, index) => {
+                if (partnerLogos[index]) {
+                    partnerLogos[index].src = partnerImage.imageUrl;
+                    partnerLogos[index].alt = partnerImage.altText;
+                    console.log(`✅ Partner-Logo ${index + 1} aktualisiert:`, partnerImage.name);
+                }
+            });
+        }
+        
+        // Instagram/Galerie-Bild aktualisieren
+        if (this.products.gallery && this.products.gallery.length > 0) {
+            const instagramImg = document.querySelector('.instagram-img');
+            if (instagramImg) {
+                const galleryImage = this.products.gallery[0];
+                instagramImg.src = galleryImage.imageUrl;
+                instagramImg.alt = galleryImage.altText;
+                console.log('✅ Galerie-Bild aktualisiert:', galleryImage.name);
+            }
+        }
+        
+        console.log('📸 Alle verfügbaren Bilder aktualisiert');
     }
 
     // Content auf der Seite aktualisieren
