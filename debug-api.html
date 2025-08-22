@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔧 API Debug Test</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            padding: 20px; 
+            background: #f5f5f5; 
+        }
+        .test-box { 
+            background: white; 
+            padding: 20px; 
+            margin: 10px 0; 
+            border-radius: 10px; 
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1); 
+        }
+        .success { border-left: 5px solid #28a745; }
+        .error { border-left: 5px solid #dc3545; }
+        .warning { border-left: 5px solid #ffc107; }
+        button { 
+            background: #007bff; 
+            color: white; 
+            border: none; 
+            padding: 10px 20px; 
+            border-radius: 5px; 
+            cursor: pointer; 
+            margin: 5px; 
+        }
+        button:hover { background: #0056b3; }
+        pre { 
+            background: #f8f9fa; 
+            padding: 15px; 
+            border-radius: 5px; 
+            overflow-x: auto; 
+            font-size: 12px; 
+        }
+        .step { margin: 20px 0; }
+    </style>
+</head>
+<body>
+    <h1>🔧 MoreMori API Debug Test</h1>
+    <p><strong>URL:</strong> https://keen-manatee-56f4c9.netlify.app/</p>
+
+    <div class="step">
+        <button onclick="testAllAPIs()">🚀 ALLE APIs TESTEN</button>
+        <button onclick="clearResults()">🗑️ Ergebnisse löschen</button>
+    </div>
+
+    <div id="results"></div>
+
+    <script>
+        const API_BASE = '/.netlify/functions/supabase-api';
+        
+        function log(message, type = 'info') {
+            const results = document.getElementById('results');
+            const div = document.createElement('div');
+            div.className = `test-box ${type}`;
+            div.innerHTML = `
+                <strong>${new Date().toLocaleTimeString()}</strong> - ${message}
+            `;
+            results.appendChild(div);
+            console.log(message);
+        }
+
+        function clearResults() {
+            document.getElementById('results').innerHTML = '';
+        }
+
+        async function testAPI(endpoint, name) {
+            log(`🔄 Teste ${name}...`);
+            
+            try {
+                const url = `${API_BASE}?action=get&type=${endpoint}`;
+                log(`📡 URL: ${url}`);
+                
+                const response = await fetch(url);
+                log(`📊 Status: ${response.status} ${response.statusText}`);
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    log(`✅ ${name} erfolgreich: ${JSON.stringify(data).substring(0, 200)}...`, 'success');
+                    return data;
+                } else {
+                    const errorText = await response.text();
+                    log(`❌ ${name} Fehler: ${errorText}`, 'error');
+                    return null;
+                }
+                
+            } catch (error) {
+                log(`💥 ${name} Exception: ${error.message}`, 'error');
+                return null;
+            }
+        }
+
+        async function testAllAPIs() {
+            clearResults();
+            log('🚀 Starte API-Tests...', 'warning');
+            
+            // Teste alle Endpoints
+            const endpoints = [
+                { endpoint: 'content', name: 'Content (Texte)' },
+                { endpoint: 'products', name: 'Products (Bilder)' },
+                { endpoint: 'prices', name: 'Prices (Preise)' },
+                { endpoint: 'banners', name: 'Banners' },
+                { endpoint: 'calendar', name: 'Calendar (Events)' },
+                { endpoint: 'faq', name: 'FAQ' }
+            ];
+            
+            for (const {endpoint, name} of endpoints) {
+                const result = await testAPI(endpoint, name);
+                
+                if (result && Array.isArray(result) && result.length > 0) {
+                    log(`📝 ${name} Daten gefunden: ${result.length} Einträge`, 'success');
+                    
+                    // Zeige erstes Element
+                    const first = result[0];
+                    const preview = Object.keys(first).map(key => 
+                        `${key}: ${JSON.stringify(first[key])}`
+                    ).join(', ');
+                    log(`🔍 Erstes Element: ${preview.substring(0, 300)}...`);
+                } else if (result && Array.isArray(result)) {
+                    log(`⚠️ ${name} ist leer (keine Daten)`, 'warning');
+                }
+                
+                // Kurze Pause zwischen Tests
+                await new Promise(resolve => setTimeout(resolve, 500));
+            }
+            
+            log('✨ Alle Tests abgeschlossen!', 'success');
+        }
+
+        // Auto-start
+        window.addEventListener('load', () => {
+            setTimeout(testAllAPIs, 1000);
+        });
+    </script>
+</body>
+</html>
