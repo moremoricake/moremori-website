@@ -473,6 +473,18 @@ async function handleDelete(type, id) {
             return { success: true, deleted: result };
         }
 
+        case 'content': {
+            const { data: result, error } = await client
+                .from('content')
+                .delete()
+                .eq('id', id)
+                .select()
+                .single();
+            
+            if (error) throw error;
+            return { success: true, deleted: result };
+        }
+
         default:
             throw new Error(`Unknown type for DELETE: ${type}`);
     }
